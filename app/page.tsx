@@ -34,7 +34,7 @@ export default function Home() {
         <div className="heroLines" aria-hidden="true" />
         <div className="heroCopy">
           <p className="eyebrow"><span /> GATEWAY TO THE ROYAL STANDARD</p>
-          <h1>CRICKET WITH<br /><em>ROYAL PURPOSE.</em></h1>
+          <h1>CRICKET WITH<br /><em>ROYAL PURPOSE</em></h1>
           <p className="heroText">
             A team built on belief, sharpened by competition and united by one
             crest. This is Entrepot Royals—where every innings carries intent.
