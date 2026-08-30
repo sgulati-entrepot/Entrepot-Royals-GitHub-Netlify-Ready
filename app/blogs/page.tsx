@@ -1,0 +1,19 @@
+import Footer from "../components/Footer";
+import HeaderSocials from "../components/HeaderSocials";
+
+const Logo = () => <img className="brandLogo" src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />;
+const posts = [
+  { number: "01", tag: "TEAM STORY", title: "Built on Belief. United by Purpose.", copy: "The values, friendships and ambition shaping the next chapter of Entrepot Royals.", href: "/#legacy" },
+  { number: "02", tag: "2025 SEASON", title: "The Debut Was Only the Beginning", copy: "A look back at the lessons, breakthroughs and Royal moments that made our first RECL chapter unforgettable.", href: "/gallery" },
+  { number: "03", tag: "ROYAL FAMILY", title: "The Heart Beyond the Boundary", copy: "Celebrating the supporters whose energy, encouragement and pride travel with the team everywhere.", href: "/supporters" },
+];
+
+export default function BlogsPage() {
+  return <main className="editorialPage">
+    <nav className="nav innerNav" aria-label="Main navigation"><a className="brand" href="/"><Logo /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></a><div className="navLinks"><a href="/">Home</a><a href="/team">Team</a><a href="/gallery">Royal Moments</a><a href="/supporters">Supporters</a><a className="active" href="/blogs">Blogs</a></div><HeaderSocials /><a className="navCta" href="/contact">Contact us ↗</a></nav>
+    <header className="editorialHero blogHero"><p className="eyebrow"><span /> STORIES FROM THE KINGDOM</p><h1>ROYAL<br /><em>BLOGS</em></h1><p>Match-day emotion, team stories and the moments that shape the Entrepot Royals journey.</p></header>
+    <section className="blogGrid">{posts.map((post) => <article key={post.number}><div className="blogNumber">{post.number}</div><small>{post.tag}</small><h2>{post.title}</h2><p>{post.copy}</p><a href={post.href}>Explore the story <span>↗</span></a></article>)}</section>
+    <section className="blogNote"><span>NEW STORIES COMING THROUGHOUT THE 2026 SEASON</span><a href="https://www.instagram.com/entrepot_royals/" target="_blank" rel="noreferrer">Follow @entrepot_royals ↗</a></section>
+    <Footer />
+  </main>;
+}
