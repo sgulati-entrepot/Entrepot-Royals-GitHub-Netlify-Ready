@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "./Footer";
-import HeaderSocials from "./HeaderSocials";
 import LandingHeroMedia from "./LandingHeroMedia";
-import MainNavLinks from "./MainNavLinks";
+import SiteHeader from "./SiteHeader";
 
 export type TeamPlayer = {
   number: string;
@@ -14,7 +14,7 @@ export type TeamPlayer = {
 };
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
 export default function TeamSeasonPage({
@@ -27,12 +27,8 @@ export default function TeamSeasonPage({
   introduction: string;
 }) {
   return (
-    <main className="profilePage teamPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <MainNavLinks active="team" />
-        <HeaderSocials /><Link className="navCta" href="/owners">Our leadership ↗</Link>
-      </nav>
+    <main className="profilePage teamPage" id="main-content">
+      <SiteHeader active="team" ctaHref="/owners" ctaLabel="Our leadership" />
 
       <header className="pageHero teamHero">
         <div>
@@ -58,7 +54,7 @@ export default function TeamSeasonPage({
             <article className={`playerCard${season === "2025" ? " legacyPlayerCard" : ""}`} key={player.number}>
               <div className={`playerVisual${season === "2025" ? " legacyPlayerVisual" : ""}`}>
                 <span>{player.number}</span>
-                {player.photo ? <img className={`playerPhoto ${player.photoClass ?? ""}`} src={player.photo} alt={`${player.name}, Entrepot Royals ${season} squad member`} /> : <Logo className="playerCrest" />}
+                {player.photo ? <Image className={`playerPhoto ${player.photoClass ?? ""}`} src={player.photo} alt={`${player.name}, Entrepot Royals ${season} squad member`} width={720} height={900} sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" /> : <Logo className="playerCrest" />}
                 {season === "2025" && <b className="seasonStamp">2025</b>}
               </div>
               <div className="playerInfo">

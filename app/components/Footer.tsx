@@ -1,14 +1,17 @@
+import Image from "next/image";
+import Link from "next/link";
+
 const Logo = () => (
-  <img className="brandLogo" src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className="brandLogo" src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={64} height={64} />
 );
 
 export default function Footer() {
   return (
     <footer className="siteFooter">
       <div className="footerIdentity">
-        <a className="brand footerBrand" href="/" aria-label="Entrepot Royals home">
+        <Link className="brand footerBrand" href="/" aria-label="Entrepot Royals home">
           <Logo /><span><b>ENTREPOT</b><strong>ROYALS</strong></span>
-        </a>
+        </Link>
         <p>RISE WITH PRIDE · PLAY WITH PURPOSE</p>
       </div>
       <nav className="footerLinks" aria-label="Footer navigation">

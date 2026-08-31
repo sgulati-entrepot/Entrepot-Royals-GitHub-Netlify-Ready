@@ -1,31 +1,27 @@
+import Image from "next/image";
 import Footer from "./components/Footer";
-import HeaderSocials from "./components/HeaderSocials";
-import MainNavLinks from "./components/MainNavLinks";
+import SiteHeader from "./components/SiteHeader";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
-const Logo = ({ className = "" }: { className?: string }) => (
-  <img
+const Logo = ({ className = "", priority = false }: { className?: string; priority?: boolean }) => (
+  <Image
     className={className}
     src="/entrepot-royals-logo.png"
     alt="Entrepot Royals official crest"
+    width={600}
+    height={600}
+    priority={priority}
   />
 );
 
 export default function Home() {
   return (
-    <main>
-      <nav className="nav" aria-label="Main navigation">
-        <a className="brand" href="#home" aria-label="Entrepot Royals home">
-          <Logo className="brandLogo" />
-          <span><b>ENTREPOT</b><strong>ROYALS</strong></span>
-        </a>
-        <MainNavLinks active="home" />
-        <HeaderSocials /><a className="navCta" href="#royal-family">Join the roar <Arrow /></a>
-      </nav>
+    <main id="main-content">
+      <SiteHeader active="home" ctaHref="#royal-family" ctaLabel="Join the roar" inner={false} />
 
       <section className="hero" id="home">
-        <img className="heroBackdropPhoto" src="/home-hero-stadium-elegant.jpg" alt="Cricketer in elegant navy and gold colours overlooking a floodlit stadium" />
+        <Image className="heroBackdropPhoto" src="/home-hero-stadium-elegant.jpg" alt="Cricketer in elegant navy and gold colours overlooking a floodlit stadium" width={1800} height={1200} sizes="100vw" priority />
         <div className="heroLines" aria-hidden="true" />
         <div className="heroCopy">
           <p className="eyebrow"><span /> GATEWAY TO THE ROYAL STANDARD</p>
@@ -49,7 +45,7 @@ export default function Home() {
           <div className="orbit orbitOne" />
           <div className="orbit orbitTwo" />
           <div className="crestGlow" />
-          <Logo className="officialCrest" />
+          <Logo className="officialCrest" priority />
         </div>
 
         <div className="heroSeasonTag"><b>EST. 2025</b><span>ONE ROYAL FAMILY</span></div>

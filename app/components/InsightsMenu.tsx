@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 
-export default function InsightsMenu({ active = false }: { active?: boolean }) {
+export default function InsightsMenu({ active = false, onNavigate }: { active?: boolean; onNavigate?: () => void }) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className={`insightsMenu${active ? " active" : ""}${open ? " open" : ""}`} onMouseLeave={() => setOpen(false)}>
-      <Link className="insightsMenuLink" href="/insights">Insights</Link>
+      <Link className="insightsMenuLink" href="/insights" onClick={onNavigate}>Insights</Link>
       <button
         className="insightsMenuToggle"
         type="button"
@@ -19,8 +19,8 @@ export default function InsightsMenu({ active = false }: { active?: boolean }) {
         <span aria-hidden="true">⌄</span>
       </button>
       <div className="insightsDropdown">
-        <Link href="/insights/testimonials">Testimonials</Link>
-        <Link href="/insights/blogs">Blogs</Link>
+        <Link href="/insights/testimonials" onClick={onNavigate}>Testimonials</Link>
+        <Link href="/insights/blogs" onClick={onNavigate}>Blogs</Link>
       </div>
     </div>
   );

@@ -1,21 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import MainNavLinks from "../components/MainNavLinks";
-
-const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
-);
+import SiteHeader from "../components/SiteHeader";
 
 export default function InsightsPage() {
   return (
-    <main className="profilePage insightsPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <MainNavLinks active="insights" />
-        <HeaderSocials /><Link className="navCta" href="/contact">Contact us ↗</Link>
-      </nav>
+    <main className="profilePage insightsPage" id="main-content">
+      <SiteHeader active="insights" ctaHref="/contact" ctaLabel="Contact us" />
 
       <header className="editorialHero insightsLandingHero">
         <div className="editorialHeroCopy">
@@ -33,11 +25,11 @@ export default function InsightsPage() {
         </div>
         <div className="teamProgramGrid insightsCardGrid">
           <Link className="teamProgramCard" href="/insights/testimonials">
-            <figure><img src="/testimonials-hero-elegant.jpg" alt="A cricket club guestbook representing Royal testimonials" /><span>01</span><i aria-hidden="true">↗</i></figure>
+            <figure><Image src="/testimonials-hero-elegant.jpg" alt="A cricket club guestbook representing Royal testimonials" width={1200} height={900} sizes="(max-width: 760px) 100vw, 50vw" /><span>01</span><i aria-hidden="true">↗</i></figure>
             <div><small>VOICES OF THE ROYAL FAMILY</small><h2>Testimonials</h2><p>Hear what it means to wear the crest, support the team and rise together as one Royal family.</p><strong>Read the voices <span>→</span></strong></div>
           </Link>
           <Link className="teamProgramCard" href="/insights/blogs">
-            <figure><img src="/blogs-hero-elegant.jpg" alt="A cricket journal and camera representing Royal stories" /><span>02</span><i aria-hidden="true">↗</i></figure>
+            <figure><Image src="/blogs-hero-elegant.jpg" alt="A cricket journal and camera representing Royal stories" width={1200} height={900} sizes="(max-width: 760px) 100vw, 50vw" /><span>02</span><i aria-hidden="true">↗</i></figure>
             <div><small>STORIES FROM THE KINGDOM</small><h2>Blogs</h2><p>Explore match-day emotion, team reflections and the moments that shape every chapter of the Royals.</p><strong>Explore the stories <span>→</span></strong></div>
           </Link>
         </div>

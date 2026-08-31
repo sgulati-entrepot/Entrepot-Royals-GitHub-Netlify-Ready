@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Footer from "../components/Footer";
-import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import MainNavLinks from "../components/MainNavLinks";
+import SiteHeader from "../components/SiteHeader";
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
 const supporters = [
@@ -33,12 +33,8 @@ const supporters = [
 
 export default function SupportersPage() {
   return (
-    <main className="profilePage supportersPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <a className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></a>
-        <MainNavLinks active="supporters" />
-        <HeaderSocials /><a className="navCta" href="/contact">Contact us ↗</a>
-      </nav>
+    <main className="profilePage supportersPage" id="main-content">
+      <SiteHeader active="supporters" ctaHref="/contact" ctaLabel="Contact us" />
 
       <header className="supportersHero">
         <div className="supportersHeroCopy">
@@ -58,7 +54,7 @@ export default function SupportersPage() {
       <section className="supporterStories" aria-label="Featured Royal supporters">
         {supporters.map((supporter, index) => (
           <article className={`supporterStory supporterStory${index + 1}`} key={supporter.title}>
-            <div className="supporterPhoto"><img src={supporter.src} alt={supporter.alt} /></div>
+            <div className="supporterPhoto"><Image src={supporter.src} alt={supporter.alt} width={1000} height={1200} sizes="(max-width: 760px) 100vw, 50vw" /></div>
             <div className="supporterCopy"><small>{supporter.label}</small><h3>{supporter.title}</h3><p>{supporter.copy}</p><span>{String(index + 1).padStart(2, "0")}</span></div>
           </article>
         ))}

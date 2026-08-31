@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Footer from "../components/Footer";
-import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import MainNavLinks from "../components/MainNavLinks";
+import SiteHeader from "../components/SiteHeader";
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
 const moments = [
@@ -20,12 +20,8 @@ const moments = [
 
 export default function GalleryPage() {
   return (
-    <main className="profilePage galleryPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <a className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></a>
-        <MainNavLinks active="gallery" />
-        <HeaderSocials /><a className="navCta" href="/contact">Contact us ↗</a>
-      </nav>
+    <main className="profilePage galleryPage" id="main-content">
+      <SiteHeader active="gallery" ctaHref="/contact" ctaLabel="Contact us" />
 
       <header className="galleryHero">
         <div><p className="eyebrow"><span /> THROUGH THE ROYAL LENS</p><h1>ROYAL MOMENTS<br /><em>GALLERY</em></h1><p>Celebrating the people, matches and memories that shape the Entrepot Royals journey.</p></div>
@@ -47,7 +43,7 @@ export default function GalleryPage() {
         <div className="momentsGrid moments2025">
           {moments.map((moment, index) => (
             <figure className={`momentCard momentCard${index + 1}${moment.fit === "contain" ? " momentContain" : ""}`} key={moment.title}>
-              <img src={moment.src} alt={moment.alt} />
+              <Image src={moment.src} alt={moment.alt} width={1200} height={900} sizes="(max-width: 430px) 100vw, (max-width: 1000px) 50vw, 34vw" />
               <figcaption><small>{moment.category}</small><strong>{moment.title}</strong><span>{String(index + 1).padStart(2, "0")}</span></figcaption>
             </figure>
           ))}

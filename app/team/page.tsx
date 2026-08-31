@@ -1,21 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import MainNavLinks from "../components/MainNavLinks";
+import SiteHeader from "../components/SiteHeader";
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
 export default function TeamPage() {
   return (
-    <main className="profilePage teamPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <MainNavLinks active="team" />
-        <HeaderSocials /><Link className="navCta" href="/owners">Our leadership ↗</Link>
-      </nav>
+    <main className="profilePage teamPage" id="main-content">
+      <SiteHeader active="team" ctaHref="/owners" ctaLabel="Our leadership" />
 
       <header className="teamProgramsHero">
         <div>
@@ -49,7 +45,7 @@ export default function TeamPage() {
           </Link>
           <Link className="teamProgramCard" href="/team/2025">
             <figure>
-              <img src="/team-2025-hero-elegant.jpg" alt="The Entrepot Royals 2025 cricket squad in a pre-match huddle" />
+              <Image src="/team-2025-hero-elegant.jpg" alt="The Entrepot Royals 2025 cricket squad in a pre-match huddle" width={1200} height={900} sizes="(max-width: 760px) 100vw, 50vw" />
               <span>02</span><i aria-hidden="true">↗</i>
             </figure>
             <div>

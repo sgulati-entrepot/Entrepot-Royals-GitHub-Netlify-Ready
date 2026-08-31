@@ -1,11 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
-import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import MainNavLinks from "../components/MainNavLinks";
+import SiteHeader from "../components/SiteHeader";
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
+  <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
 const chapters = [
@@ -16,12 +16,8 @@ const chapters = [
 
 export default function OurStoryPage() {
   return (
-    <main className="profilePage storyPage">
-      <nav className="nav innerNav" aria-label="Main navigation">
-        <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <MainNavLinks active="story" />
-        <HeaderSocials /><Link className="navCta" href="/team">Meet the Royals ↗</Link>
-      </nav>
+    <main className="profilePage storyPage" id="main-content">
+      <SiteHeader active="story" ctaHref="/team" ctaLabel="Meet the Royals" />
       <header className="editorialHero storyHero">
         <div className="editorialHeroCopy"><p className="eyebrow"><span /> THE JOURNEY BEHIND THE CREST</p><h1>OUR<br /><em>STORY</em></h1><p>From a first season built on belief to a future shaped by purpose—this is how the Entrepot Royals continue to rise.</p></div>
         <LandingHeroMedia photo="/our-story-hero-elegant.jpg" alt="A heritage cricket pavilion with a worn bat, leather kit bag and scorebook at dawn" caption="BELIEF · CHARACTER · ONE ROYAL PURPOSE" className="storyHeroMedia" />
