@@ -324,7 +324,7 @@ footer { background:#00040c; }
   background:
     linear-gradient(90deg,rgba(1,6,17,.96) 0%,rgba(2,12,30,.86) 46%,rgba(2,12,30,.42) 100%),
     linear-gradient(180deg,rgba(1,6,17,.05) 52%,rgba(1,6,17,.82) 100%),
-    url('/cricket-hero-royal-kit.png') center/cover no-repeat;
+    url('/home-hero-stadium-elegant.jpg') center/cover no-repeat;
 }
 .hero::before { width:640px; height:640px; right:-210px; top:120px; border-color:rgba(245,223,154,.15); }
 .hero::after { content:"ENTREPOT ROYALS · RECL"; right:-145px; bottom:305px; }
@@ -1351,4 +1351,19 @@ html,body { width:100%; overflow-x:hidden; }
   }
   .ownersHeroMedia .landingHeroPhoto,.contactHero .landingHeroPhoto{object-position:58% 25%!important}
   .galleryHeroMedia .landingHeroPhoto,.supportersHeroVisual.landingHeroMedia .landingHeroPhoto,.teamIndexHeroMedia .landingHeroPhoto,.team2025HeroMedia .landingHeroPhoto{object-position:center!important}
+}
+
+/* Let the elegant home photograph lead; retain the crest as a quiet brand signature. */
+.hero .crestWrap {
+  position:absolute!important; z-index:4!important; right:5vw!important; bottom:42px!important;
+  width:170px!important; aspect-ratio:1!important; margin:0!important; padding:0!important;
+  transform:none!important; filter:drop-shadow(0 18px 32px rgba(0,0,0,.48))!important;
+}
+.hero .crestWrap::before { inset:-8px!important; border-color:rgba(245,223,154,.24)!important; transform:none!important; }
+.hero .officialCrest { width:100%!important; border-width:1px!important; border-radius:2px!important; }
+@media(max-width:850px){
+  .hero .crestWrap{right:22px!important;bottom:24px!important;width:116px!important}
+}
+@media(max-width:520px){
+  .hero .crestWrap{right:18px!important;bottom:20px!important;width:92px!important}
 }
