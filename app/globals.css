@@ -1254,3 +1254,101 @@ html,body { width:100%; overflow-x:hidden; }
   .fixtureRow{min-height:0}
   .quoteBand,.goldBand{min-height:0;padding:42px 20px}
 }
+
+/* Full-bleed photographic landing banners */
+.pageHero,
+.galleryHero,
+.supportersHero,
+.editorialHero,
+.teamProgramsHero {
+  isolation:isolate;
+}
+.pageHero::after,
+.galleryHero::after,
+.supportersHero::after,
+.editorialHero::after,
+.teamProgramsHero::after {
+  content:""; position:absolute; z-index:1; inset:0; pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(1,6,17,.98) 0%,rgba(3,15,38,.92) 34%,rgba(3,15,38,.5) 62%,rgba(1,6,17,.2) 100%),
+    linear-gradient(0deg,rgba(1,6,17,.58),transparent 48%);
+}
+.pageHero>.landingHeroMedia,
+.galleryHero>.landingHeroMedia,
+.supportersHero>.landingHeroMedia,
+.editorialHero>.landingHeroMedia,
+.teamProgramsHero>.landingHeroMedia {
+  position:absolute; z-index:0; inset:0; width:100%; height:100%; margin:0; padding:0;
+  max-width:none; background:#020713; border:0; box-shadow:none;
+}
+.pageHero>.landingHeroMedia .landingHeroPhoto,
+.galleryHero>.landingHeroMedia .landingHeroPhoto,
+.supportersHero>.landingHeroMedia .landingHeroPhoto,
+.editorialHero>.landingHeroMedia .landingHeroPhoto,
+.teamProgramsHero>.landingHeroMedia .landingHeroPhoto {
+  width:100%; height:100%; object-fit:cover; filter:saturate(.9) contrast(1.05);
+}
+.pageHero>.landingHeroMedia>span,
+.galleryHero>.landingHeroMedia>span,
+.supportersHero>.landingHeroMedia>span,
+.editorialHero>.landingHeroMedia>span,
+.teamProgramsHero>.landingHeroMedia>span { display:none; }
+.pageHero>.landingHeroMedia .landingHeroCrest,
+.galleryHero>.landingHeroMedia .landingHeroCrest,
+.supportersHero>.landingHeroMedia .landingHeroCrest,
+.editorialHero>.landingHeroMedia .landingHeroCrest,
+.teamProgramsHero>.landingHeroMedia .landingHeroCrest {
+  z-index:4; right:5.5vw; bottom:38px; width:96px; height:96px; padding:4px;
+  border:1px solid #e9c95a; box-shadow:0 16px 38px rgba(0,0,0,.5);
+}
+.pageHero>div:first-child,
+.galleryHero>div:first-child,
+.supportersHeroCopy,
+.editorialHeroCopy,
+.teamProgramsHero>div:first-child { position:relative; z-index:3; max-width:700px; }
+
+.ownersHeroMedia .landingHeroPhoto { object-position:70% 28%!important; }
+.teamIndexHeroMedia .landingHeroPhoto { object-position:62% center!important; }
+.team2025HeroMedia .landingHeroPhoto { object-position:62% center!important; }
+.team2026HeroMedia .landingHeroPhoto { object-position:72% center!important; }
+.galleryHeroMedia .landingHeroPhoto { object-position:68% 34%!important; }
+.supportersHeroVisual.landingHeroMedia .landingHeroPhoto { height:100%; object-position:66% 35%!important; }
+.blogHero .landingHeroPhoto { object-position:64% center!important; }
+.contactHero .landingHeroPhoto { object-position:70% 28%!important; }
+
+.fixturesHero { isolation:isolate; }
+.fixturesHero::before {
+  content:""; position:absolute; z-index:1; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,rgba(1,6,17,.98),rgba(3,15,38,.86) 38%,rgba(3,15,38,.25) 78%);
+}
+.fixturesHeroPhoto {
+  inset:0; width:100%; height:100%; opacity:.78; object-position:68% center;
+  mask-image:none; filter:saturate(.92) contrast(1.05);
+}
+.heroBackdropPhoto { opacity:.7; mask-image:none; object-position:68% center; }
+.hero::after {
+  content:""; position:absolute; z-index:1; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,rgba(1,6,17,.98),rgba(3,15,38,.88) 42%,rgba(3,15,38,.26) 78%);
+  transform:none; color:transparent;
+}
+
+@media(max-width:900px){
+  .pageHero::after,.galleryHero::after,.supportersHero::after,.editorialHero::after,.teamProgramsHero::after{
+    background:linear-gradient(0deg,rgba(1,6,17,.98) 0%,rgba(3,15,38,.88) 48%,rgba(3,15,38,.36) 100%);
+  }
+  .pageHero>div:first-child,.galleryHero>div:first-child,.supportersHeroCopy,.editorialHeroCopy,.teamProgramsHero>div:first-child{
+    align-self:end; max-width:680px; margin:0 auto; text-align:center;
+  }
+  .pageHero>.landingHeroMedia .landingHeroCrest,.galleryHero>.landingHeroMedia .landingHeroCrest,.supportersHero>.landingHeroMedia .landingHeroCrest,.editorialHero>.landingHeroMedia .landingHeroCrest,.teamProgramsHero>.landingHeroMedia .landingHeroCrest{
+    top:105px; right:24px; bottom:auto; width:76px; height:76px;
+  }
+  .fixturesHero::before,.hero::after{background:linear-gradient(0deg,rgba(1,6,17,.98),rgba(3,15,38,.78) 58%,rgba(3,15,38,.28))}
+}
+@media(max-width:650px){
+  .pageHero,.galleryHero,.supportersHero,.editorialHero,.teamProgramsHero,.fixturesHero{min-height:680px}
+  .pageHero>.landingHeroMedia .landingHeroCrest,.galleryHero>.landingHeroMedia .landingHeroCrest,.supportersHero>.landingHeroMedia .landingHeroCrest,.editorialHero>.landingHeroMedia .landingHeroCrest,.teamProgramsHero>.landingHeroMedia .landingHeroCrest{
+    top:92px; right:18px; width:66px; height:66px;
+  }
+  .ownersHeroMedia .landingHeroPhoto,.contactHero .landingHeroPhoto{object-position:58% 25%!important}
+  .galleryHeroMedia .landingHeroPhoto,.supportersHeroVisual.landingHeroMedia .landingHeroPhoto,.teamIndexHeroMedia .landingHeroPhoto,.team2025HeroMedia .landingHeroPhoto{object-position:center!important}
+}
