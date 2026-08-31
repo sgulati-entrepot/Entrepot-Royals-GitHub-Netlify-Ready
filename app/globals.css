@@ -1056,3 +1056,201 @@ html,body { width:100%; overflow-x:hidden; }
   .fixturesHeroPhoto { width:100%; opacity:.28; mask-image:linear-gradient(180deg,transparent,#000 45%); }
   .heroBackdropPhoto { opacity:.3; object-position:68% center; }
 }
+
+/* ETI World-inspired editorial landing-page system
+   The structure mirrors the reference site's rhythm while retaining the Royals identity. */
+:root {
+  --eti-cream:#f4f1e7;
+  --eti-paper:#fffdf8;
+  --eti-line:#dcd6c8;
+  --eti-muted:#65706f;
+}
+
+.nav,
+.nav:not(.innerNav) {
+  top:0; left:0; right:0; width:100%; height:92px; padding:0 5.5vw;
+  border:0; border-bottom:1px solid rgba(255,255,255,.17); border-radius:0;
+  background:linear-gradient(180deg,rgba(1,6,17,.58),rgba(1,6,17,.08));
+  box-shadow:none; backdrop-filter:none;
+}
+.innerNav { position:absolute; z-index:90; background:linear-gradient(180deg,rgba(1,6,17,.72),transparent); }
+.brandLogo { border-radius:0; }
+
+.hero,
+.pageHero,
+.fixturesHero,
+.galleryHero,
+.supportersHero,
+.editorialHero,
+.teamProgramsHero {
+  border-bottom:1px solid rgba(245,223,154,.35);
+}
+.hero::before,
+.pageHero::before { border-radius:0; transform:rotate(45deg); }
+.hero h1,
+.pageHero h1,
+.fixturesHero h1,
+.galleryHero h1,
+.supportersHero h1,
+.editorialHero h1,
+.teamProgramsHero h1 {
+  letter-spacing:-.055em;
+}
+.landingHeroMedia {
+  padding:10px 10px 0; border-color:rgba(245,223,154,.72);
+  box-shadow:28px 28px 0 rgba(201,154,46,.09),0 38px 85px rgba(0,0,0,.48);
+}
+.landingHeroMedia>span { border-top:1px solid rgba(245,223,154,.2); }
+
+/* Cream catalogue canvas used by ETI's inner pages. */
+.profileSection,
+.rosterSection,
+.fixturesContent,
+.gallerySection,
+.supportersIntro,
+.supporterStories,
+.testimonialGrid,
+.blogGrid,
+.contactGrid,
+.teamProgramsCatalog,
+.statement,
+.matchCentre,
+.recl {
+  color:var(--ink); background:var(--eti-cream);
+}
+.profileSection,
+.rosterSection,
+.fixturesContent,
+.gallerySection,
+.teamProgramsCatalog,
+.testimonialGrid,
+.blogGrid,
+.contactGrid { padding-top:112px; padding-bottom:124px; }
+.sectionIntro,
+.fixturesHeading,
+.galleryIntro,
+.supportersIntro,
+.teamProgramsIntro {
+  border-top:1px solid var(--eti-line); padding-top:28px;
+}
+.sectionIntro>p:last-child,
+.rosterHead>p,
+.fixturesHeading>p,
+.galleryIntro>p,
+.supportersIntro>p,
+.teamProgramsIntro>p,
+.statementGrid p:last-child,
+.reclCopy>p:not(.sectionLabel) { color:var(--eti-muted); }
+
+/* Square, numbered catalogue cards. */
+.ownerCards,
+.teamProgramGrid,
+.supporterStories,
+.testimonialGrid,
+.blogGrid,
+.contactGrid { gap:18px; }
+.ownerCard,
+.playerCard,
+.teamProgramCard,
+.supporterStory,
+.testimonialGrid article,
+.blogGrid article,
+.contactCard {
+  color:var(--ink); background:var(--eti-paper); border:1px solid var(--eti-line);
+  border-radius:0; box-shadow:none;
+}
+.ownerCard:hover,
+.playerCard:hover,
+.teamProgramCard:hover,
+.supporterStory:hover,
+.testimonialGrid article:hover,
+.blogGrid article:hover,
+.contactCard:hover {
+  color:var(--ink); background:#fff; border-color:#b48420;
+  box-shadow:0 24px 55px rgba(2,7,19,.10); transform:translateY(-5px);
+}
+.ownerCard p,
+.playerInfo p,
+.supporterCopy p,
+.testimonialGrid article>p,
+.blogGrid p,
+.contactCard p { color:var(--eti-muted); }
+.ownerCard small,
+.playerInfo small,
+.supporterCopy small,
+.testimonialGrid small,
+.blogGrid small,
+.contactCard>span { color:#946b18; }
+.testimonialGrid article>span,
+.blogNumber,
+.supporterCopy>span { color:rgba(6,23,56,.18); }
+.testimonialGrid blockquote,
+.blogGrid h2,
+.contactCard h2 { color:var(--ink); }
+.blogGrid a,
+.contactCard i { color:#946b18; }
+
+/* ETI-style numbered rails and restrained borders. */
+.fixturesList { border-color:#cfc7b8; }
+.fixtureRow { min-height:150px; border-color:#cfc7b8; }
+.fixtureRow:hover { color:var(--ink); background:var(--eti-paper); }
+.fixtureInfo { color:var(--eti-muted); }
+.galleryYearHeading { color:var(--ink); border-top-color:#cfc7b8; border-bottom-color:#cfc7b8; }
+.galleryYearHeading small { color:#946b18; }
+.galleryYearHeading>span { color:var(--eti-muted); }
+.momentsGrid { gap:18px; }
+.momentCard { border-color:#cfc7b8; }
+.yearComingSoon { border-radius:0; }
+
+.supportersIntro { padding:112px 6.5vw 64px; }
+.supporterStories { padding-top:0; }
+.supporterStory3 { background:var(--eti-paper); }
+.supporterValues,
+.galleryCategories,
+.blogNote,
+.seasonSwitch {
+  background:#020713; border-color:rgba(201,154,46,.3);
+}
+
+/* Homepage follows the same editorial alternation as ETI's homepage/about pages. */
+.clubLinks { background:var(--eti-paper); border-bottom:1px solid var(--eti-line); }
+.clubLinks a { color:var(--ink); border-color:var(--eti-line); }
+.clubLinks strong { color:var(--ink); }
+.clubLinks a:hover strong { color:#fff; }
+.matchCentre { border-top:0; }
+.featuredMatch { color:#fff; }
+.statement { color:var(--ink); }
+.statementGrid .lead { color:var(--ink); }
+.recl { color:var(--ink); }
+.reclCopy { padding-top:118px; padding-bottom:118px; }
+.codeSection,
+.join,
+.editorialCta,
+.contactBanner,
+.supporterJoin,
+.resultsSection { background:radial-gradient(circle at 15% 18%,#123d80,transparent 27%),#020713; }
+.values article { border-radius:0; }
+.reclBadge,
+.joinLogo,
+.contactBanner>img,
+.supporterJoinLogo { border-radius:0; }
+
+.quoteBand,
+.goldBand {
+  min-height:140px; padding:45px 6.5vw; border-top:1px solid rgba(245,223,154,.35);
+  background:#020713; color:#fff;
+}
+.quoteBand a,
+.goldBand a { background:transparent; color:#f5df9a; border-bottom:1px solid #c99a2e; }
+
+@media(max-width:900px){
+  .nav,.nav:not(.innerNav){height:78px;padding:0 20px}
+  .profileSection,.rosterSection,.fixturesContent,.gallerySection,.teamProgramsCatalog,.testimonialGrid,.blogGrid,.contactGrid{padding-top:78px;padding-bottom:86px}
+  .supportersIntro{padding-top:78px}
+}
+@media(max-width:650px){
+  .nav,.nav:not(.innerNav){background:rgba(1,6,17,.84)}
+  .sectionIntro,.fixturesHeading,.galleryIntro,.supportersIntro,.teamProgramsIntro{padding-top:20px}
+  .fixtureRow{min-height:0}
+  .quoteBand,.goldBand{min-height:0;padding:42px 20px}
+}
