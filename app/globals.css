@@ -1455,3 +1455,19 @@ html,body { width:100%; overflow-x:hidden; }
   .storyPromiseLogo{margin:auto}
   .storyPromise>.goldButton{grid-column:auto;justify-self:center}
 }
+
+/* Keep the complete desktop navigation on one clean line. */
+@media(min-width:761px){
+  .navLinks{align-items:center;flex-wrap:nowrap;white-space:nowrap;min-width:0}
+  .navLinks>a,.teamMenuLink,.insightsMenuLink{white-space:nowrap}
+  .brand,.headerSocials,.navCta{flex:0 0 auto}
+}
+@media(min-width:761px) and (max-width:1450px){
+  .nav,.nav:not(.innerNav),.innerNav{padding-left:2vw;padding-right:2vw}
+  .navLinks{gap:.72vw;font-size:7.5px;letter-spacing:.1em}
+  .teamMenuToggle,.insightsMenuToggle{width:15px}
+  .brand{gap:8px}
+  .brandLogo{width:48px;height:48px}
+  .brand strong{font-size:18px}
+  .headerSocials a{width:31px;height:31px}
+}

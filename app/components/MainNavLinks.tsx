@@ -13,7 +13,7 @@ export default function MainNavLinks({ active }: { active?: ActivePage }) {
       <TeamMenu active={active === "team"} />
       <Link className={active === "fixtures" ? "active" : ""} href="/fixtures">Fixtures</Link>
       <Link className={active === "gallery" ? "active" : ""} href="/gallery">Royal Moments</Link>
-      <Link className={active === "supporters" ? "active" : ""} href="/supporters">Supporters</Link>
+      <Link className={active === "supporters" ? "active" : ""} href="/supporters">Royal Supporters</Link>
       <InsightsMenu active={active === "insights"} />
     </div>
   );
