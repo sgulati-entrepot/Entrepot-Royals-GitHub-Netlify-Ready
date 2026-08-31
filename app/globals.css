@@ -1537,9 +1537,13 @@ html,body { width:100%; overflow-x:hidden; }
   .headerSocials a{width:30px;height:30px}
 }
 
-/* Compact the desktop tabs and preserve a clear social-media zone. */
+/* Give desktop tabs breathing room while preserving a clear social-media zone. */
 @media(min-width:761px){
-  .navLinks{gap:clamp(4px,.45vw,8px)}
-  .teamMenuToggle,.insightsMenuToggle{width:12px}
-  .headerSocials{margin-left:18px}
+  .navLinks{gap:clamp(8px,.75vw,14px)}
+  .teamMenuToggle,.insightsMenuToggle{width:13px}
+  .headerSocials{margin-left:16px}
+}
+@media(min-width:761px) and (max-width:1100px){
+  .navLinks{gap:clamp(6px,.65vw,8px)}
+  .headerSocials{margin-left:12px}
 }
