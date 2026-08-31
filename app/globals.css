@@ -842,20 +842,20 @@ html,body { width:100%; overflow-x:hidden; }
 @media(max-width:850px){.hero{min-height:0!important;padding-bottom:70px!important}.hero .crestWrap{width:min(62vw,320px)!important;transform:none}}
 @media(max-width:520px){.hero{padding-bottom:56px!important}.hero .crestWrap{width:min(72vw,275px)!important}}
 
-/* Crest-colour treatment for the primary navigation action. */
+/* Match the primary navigation action to the Meet the Royals button. */
 .nav:not(.innerNav) .navCta {
-  color:var(--champagne);
-  border-color:#e9c95a;
-  background:linear-gradient(112deg,var(--royal) 0 74%,var(--bright-gold) 74% 100%);
-  box-shadow:0 8px 22px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.16);
+  color:#06132a;
+  border:1px solid rgba(255,241,185,.75);
+  background:linear-gradient(115deg,#a97516,#f5df9a 42%,#d5a536 76%,#f8e8ad);
+  box-shadow:0 14px 36px rgba(180,124,19,.25),inset 0 1px 0 #fff1b9;
   transition:color .22s ease,background .22s ease,box-shadow .22s ease,transform .22s ease;
 }
-.nav:not(.innerNav) .navCta span { color:var(--navy); }
+.nav:not(.innerNav) .navCta span { color:#06132a; }
 .nav:not(.innerNav) .navCta:hover {
-  color:var(--navy);
-  background:linear-gradient(112deg,var(--bright-gold),var(--gold));
-  box-shadow:0 10px 28px rgba(213,165,54,.28);
-  transform:translateY(-1px);
+  color:#06132a;
+  background:#efc667;
+  box-shadow:0 14px 36px rgba(180,124,19,.25),inset 0 1px 0 #fff1b9;
+  transform:translateY(-2px);
 }
 .nav:not(.innerNav) .navCta:focus-visible {
   outline:2px solid #fff;
