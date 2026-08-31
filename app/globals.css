@@ -35,7 +35,8 @@ a { color: inherit; text-decoration: none; }
 .headerSocials a { width:34px; height:34px; display:grid; place-items:center; color:#f5df9a; border:1px solid rgba(245,223,154,.4); border-radius:50%; transition:.22s; }
 .headerSocials a:hover { color:#010611; background:#f5df9a; border-color:#f5df9a; transform:translateY(-2px); }
 .headerSocials i { font:normal 15px Arial,sans-serif; }
-.headerSocials a:last-child i { font-size:10px; }
+.headerSocials .youtubeSocial i { font-size:10px; }
+.headerSocials svg { width:15px; height:15px; fill:currentColor; }
 .headerSocials span { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
 @media(max-width:1220px){
@@ -310,7 +311,7 @@ footer { background:#00040c; }
 .socialActions { display:flex; align-items:center; justify-content:center; gap:28px; }
 .join .socialActions .textLink { color:#fff; border-bottom:1px solid rgba(245,223,154,.55); padding-bottom:7px; font-size:9px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
 .youtubeButton { min-height:50px; padding:0 22px; display:inline-flex; align-items:center; justify-content:center; gap:10px; color:#fff; border:1px solid rgba(245,223,154,.48); background:rgba(255,255,255,.055); font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; transition:.25s; }.youtubeButton:hover { color:#010611; background:#f5df9a; border-color:#f5df9a; transform:translateY(-2px); }.youtubeButton i { color:#e8b638; font-style:normal; }.youtubeButton:hover i { color:#010611; }
-.footerSocials { display:flex; align-items:center; justify-content:flex-end; gap:18px; flex-wrap:wrap; }.instagramLink,.youtubeLink { display:inline-flex; align-items:center; gap:9px; color:#f5df9a; font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; transition:.2s; }.instagramLink:hover,.youtubeLink:hover { color:#fff; }.instagramLink i,.youtubeLink i { display:grid; place-items:center; width:25px; height:25px; border:1px solid rgba(245,223,154,.55); border-radius:7px; font:normal 18px Arial,sans-serif; }.youtubeLink i { border-radius:4px; font-size:11px; }
+.footerSocials { display:flex; align-items:center; justify-content:flex-end; gap:18px; flex-wrap:wrap; }.instagramLink,.youtubeLink,.facebookLink { display:inline-flex; align-items:center; gap:9px; color:#f5df9a; font-size:9px; font-weight:800; letter-spacing:.13em; text-transform:uppercase; transition:.2s; }.instagramLink:hover,.youtubeLink:hover,.facebookLink:hover { color:#fff; }.instagramLink i,.youtubeLink i,.facebookLink i { display:grid; place-items:center; width:25px; height:25px; border:1px solid rgba(245,223,154,.55); border-radius:7px; font:normal 18px Arial,sans-serif; }.youtubeLink i { border-radius:4px; font-size:11px; }.facebookLink i{border-radius:50%}.facebookLink svg{width:14px;height:14px;fill:currentColor}
 @media(max-width:1000px){.footerSocials{justify-content:center}}
 @media(max-width:650px){.homeFixtureRow{grid-template-columns:1fr;gap:10px;padding:20px 0}.homeFixtureRow:hover{padding:20px 12px}.homeFixtureRow>i{text-align:left}.homeFixtureRow>b em{margin:0 8px}.teamHeroPortrait{margin-top:45px;width:min(390px,90vw)}}
 @media(max-width:520px){.socialActions{flex-direction:column;gap:20px}}
