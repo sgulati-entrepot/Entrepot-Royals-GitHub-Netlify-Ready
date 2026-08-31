@@ -18,7 +18,7 @@ export default function OwnersPage() {
 
       <header className="pageHero ownersHero">
         <div><p className="eyebrow"><span /> BEHIND THE ROYALS</p><h1>TEAM<br /><em>OWNERS</em></h1><p>Leadership with vision, passion and an unwavering belief in the team.</p></div>
-        <LandingHeroMedia photo="/sajeev-gulati-enhanced.png" alt="Sajeev Gulati representing Entrepot Royals leadership" caption="LEADERSHIP · VISION · ROYAL PURPOSE" className="ownersHeroMedia" />
+        <LandingHeroMedia photo="/owners-hero-pavilion-elegant.jpg" alt="Elegant cricket pavilion overlooking a floodlit ground, representing Entrepot Royals leadership and vision" caption="LEADERSHIP · VISION · ROYAL PURPOSE" className="ownersHeroMedia" />
       </header>
 
       <section className="profileSection">
