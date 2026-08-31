@@ -24,7 +24,7 @@ export default function OurStoryPage() {
       </nav>
       <header className="editorialHero storyHero">
         <div className="editorialHeroCopy"><p className="eyebrow"><span /> THE JOURNEY BEHIND THE CREST</p><h1>OUR<br /><em>STORY</em></h1><p>From a first season built on belief to a future shaped by purpose—this is how the Entrepot Royals continue to rise.</p></div>
-        <LandingHeroMedia photo="/home-hero-stadium-elegant.jpg" alt="A cricketer in navy and gold overlooking a floodlit ground" caption="BELIEF · CHARACTER · ONE ROYAL PURPOSE" className="storyHeroMedia" />
+        <LandingHeroMedia photo="/our-story-hero-elegant.jpg" alt="A heritage cricket pavilion with a worn bat, leather kit bag and scorebook at dawn" caption="BELIEF · CHARACTER · ONE ROYAL PURPOSE" className="storyHeroMedia" />
       </header>
       <section className="storyOverview">
         <div><p className="sectionLabel">01 / THE ROYAL IDEA</p><h2>MORE THAN A TEAM.<br /><em>A STANDARD.</em></h2></div>
