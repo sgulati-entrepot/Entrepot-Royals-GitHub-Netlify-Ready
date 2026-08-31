@@ -11,7 +11,7 @@ const moments = [
   { src: "/runner-up-mini-tournament-01-enhanced.png", title: "First Runner-Up — Mini Tournament", category: "A Proud Royal Finish", alt: "Entrepot Royals celebrating their first runner-up finish in the 2025 mini tournament with trophies", fit: "contain" },
   { src: "/royal-moment-team-2025-enhanced.png", title: "The 2025 Royals", category: "Team of 2025", alt: "Entrepot Royals players together in the 2025 team kit", fit: "contain" },
   { src: "/royal-moment-squad-backs-enhanced.png", title: "Names Behind the Crest", category: "Squad Unity", alt: "Entrepot Royals players displaying their names and jersey numbers", fit: "contain" },
-  { src: "/royal-moment-trophy-enhanced.png", title: "A Royal Triumph", category: "Trophy Moment", alt: "Entrepot Royals players celebrating together with a trophy" },
+  { src: "/royal-moment-trophy-enhanced.png", title: "A Royal Triumph", category: "Trophy Moment", alt: "Entrepot Royals players celebrating together with a trophy", fit: "contain" },
   { src: "/sajeev-gulati-enhanced.png", title: "Vision Behind the Royals", category: "Team Leadership", alt: "Sajeev Gulati, Team Owner of Entrepot Royals" },
   { src: "/akriti-gulati-enhanced.png", title: "The Royal Family", category: "Team Leadership", alt: "Akriti Gulati, Team Owner of Entrepot Royals" },
   { src: "/royal-moment-yellow-joy-enhanced.png", title: "A Smile Full of Sunshine — Our Youngest Royal", category: "Royal Joy", alt: "A smiling young Entrepot Royals supporter dressed in yellow" },
