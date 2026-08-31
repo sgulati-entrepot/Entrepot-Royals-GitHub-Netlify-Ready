@@ -1471,3 +1471,30 @@ html,body { width:100%; overflow-x:hidden; }
   .brand strong{font-size:18px}
   .headerSocials a{width:31px;height:31px}
 }
+
+/* Keep the homepage fixtures highly visible against a royal-blue canvas. */
+.matchCentre{
+  color:#fff;
+  background:radial-gradient(circle at 14% 18%,#174c9a 0%,#0a2b63 30%,#03132f 72%,#010711 100%)!important;
+  border-top:1px solid rgba(245,223,154,.28);
+  border-bottom:1px solid rgba(245,223,154,.28);
+}
+.matchCentre::before{color:rgba(255,255,255,.035)}
+.matchCentre .sectionLabel{color:#f2c451}
+.matchCentre .matchTitle h2,.matchCentre .matchTitle>a{color:#fff}
+.featuredMatch{
+  color:#fff;
+  background:linear-gradient(145deg,#12458f 0%,#082858 48%,#020b1d 100%);
+  border:1px solid rgba(245,223,154,.46);
+  border-top:4px solid #e4b94e;
+  box-shadow:0 30px 75px rgba(0,0,0,.38);
+}
+.homeFixtureList{
+  padding:0 24px;
+  background:rgba(4,22,53,.72);
+  border:1px solid rgba(245,223,154,.3);
+}
+.homeFixtureRow{color:#fff;border-bottom-color:rgba(245,223,154,.24)}
+.homeFixtureRow:last-child{border-bottom:0}
+.homeFixtureRow:hover{background:#123f86}
+@media(max-width:650px){.homeFixtureList{padding:0 16px}}
