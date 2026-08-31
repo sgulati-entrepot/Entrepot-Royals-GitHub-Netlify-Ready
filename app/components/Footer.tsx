@@ -13,8 +13,10 @@ export default function Footer() {
       </div>
       <nav className="footerLinks" aria-label="Footer navigation">
         <span>EXPLORE</span>
-        <a href="/testimonials">Testimonials</a>
-        <a href="/blogs">Blogs</a>
+        <a href="/our-story">Our Story</a>
+        <a href="/insights">Insights</a>
+        <a href="/insights/testimonials">Testimonials</a>
+        <a href="/insights/blogs">Blogs</a>
         <a href="/contact">Contact Us</a>
       </nav>
       <div className="footerContact">

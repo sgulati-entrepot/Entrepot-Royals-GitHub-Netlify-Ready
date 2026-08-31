@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import TeamMenu from "../components/TeamMenu";
+import MainNavLinks from "../components/MainNavLinks";
 
 const Logo = ({ className = "" }: { className?: string }) => (
   <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
@@ -13,7 +13,7 @@ export default function TeamPage() {
     <main className="profilePage teamPage">
       <nav className="nav innerNav" aria-label="Main navigation">
         <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <div className="navLinks"><Link href="/">Home</Link><Link href="/owners">Owners</Link><TeamMenu active /><Link href="/fixtures">Fixtures</Link><Link href="/gallery">Royal Moments</Link><Link href="/supporters">Supporters</Link></div>
+        <MainNavLinks active="team" />
         <HeaderSocials /><Link className="navCta" href="/owners">Our leadership ↗</Link>
       </nav>
 

@@ -1,6 +1,6 @@
 import Footer from "./components/Footer";
 import HeaderSocials from "./components/HeaderSocials";
-import TeamMenu from "./components/TeamMenu";
+import MainNavLinks from "./components/MainNavLinks";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -20,14 +20,7 @@ export default function Home() {
           <Logo className="brandLogo" />
           <span><b>ENTREPOT</b><strong>ROYALS</strong></span>
         </a>
-        <div className="navLinks">
-          <a href="#legacy">Our story</a>
-          <a href="/owners">Team owners</a>
-          <TeamMenu />
-          <a href="/fixtures">Fixtures & results</a>
-          <a href="/gallery">Royal Moments</a>
-          <a href="/supporters">Royal Supporters</a>
-        </div>
+        <MainNavLinks active="home" />
         <HeaderSocials /><a className="navCta" href="#royal-family">Join the roar <Arrow /></a>
       </nav>
 

@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
 import LandingHeroMedia from "../components/LandingHeroMedia";
-import TeamMenu from "../components/TeamMenu";
+import MainNavLinks from "../components/MainNavLinks";
 
 const Logo = ({ className = "" }: { className?: string }) => (
   <img className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />
@@ -24,7 +24,7 @@ export default function GalleryPage() {
     <main className="profilePage galleryPage">
       <nav className="nav innerNav" aria-label="Main navigation">
         <a className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></a>
-        <div className="navLinks"><a href="/">Home</a><a href="/owners">Owners</a><TeamMenu /><a href="/fixtures">Fixtures</a><a className="active" href="/gallery">Royal Moments</a><a href="/supporters">Supporters</a></div>
+        <MainNavLinks active="gallery" />
         <HeaderSocials /><a className="navCta" href="/contact">Contact us ↗</a>
       </nav>
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "./Footer";
 import HeaderSocials from "./HeaderSocials";
 import LandingHeroMedia from "./LandingHeroMedia";
-import TeamMenu from "./TeamMenu";
+import MainNavLinks from "./MainNavLinks";
 
 export type TeamPlayer = {
   number: string;
@@ -30,7 +30,7 @@ export default function TeamSeasonPage({
     <main className="profilePage teamPage">
       <nav className="nav innerNav" aria-label="Main navigation">
         <Link className="brand" href="/" aria-label="Entrepot Royals home"><Logo className="brandLogo" /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></Link>
-        <div className="navLinks"><Link href="/">Home</Link><Link href="/owners">Owners</Link><TeamMenu active /><Link href="/fixtures">Fixtures</Link><Link href="/gallery">Royal Moments</Link><Link href="/supporters">Supporters</Link></div>
+        <MainNavLinks active="team" />
         <HeaderSocials /><Link className="navCta" href="/owners">Our leadership ↗</Link>
       </nav>
 
