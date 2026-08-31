@@ -885,22 +885,22 @@ html,body { width:100%; overflow-x:hidden; }
 @media(max-width:520px){.hero .officialCrest{padding:0!important}}
 
 /* Team season navigation */
-.teamMenu { position:relative; flex:0 0 auto; }
-.teamMenu summary {
-  display:flex; align-items:center; gap:7px; min-height:38px; cursor:pointer;
-  color:inherit; opacity:.74; list-style:none; transition:color .22s ease,opacity .22s ease;
+.teamMenu { position:relative; flex:0 0 auto; display:flex; align-items:center; }
+.teamMenuLink { min-height:38px; display:flex; align-items:center; color:inherit; opacity:.74; transition:color .22s ease,opacity .22s ease; }
+.teamMenuToggle {
+  width:20px; min-height:38px; padding:0; display:grid; place-items:center; cursor:pointer;
+  color:var(--bright-gold); background:transparent; border:0;
 }
-.teamMenu summary::-webkit-details-marker { display:none; }
-.teamMenu summary>span { color:var(--bright-gold); font-size:13px; transition:transform .22s ease; }
-.teamMenu:hover summary,.teamMenu:focus-within summary,.teamMenu[open] summary,.teamMenu.active summary { color:var(--bright-gold); opacity:1; }
-.teamMenu[open] summary>span { transform:rotate(180deg); }
+.teamMenuToggle span { font-size:13px; transition:transform .22s ease; }
+.teamMenu:hover .teamMenuLink,.teamMenu:focus-within .teamMenuLink,.teamMenu.open .teamMenuLink,.teamMenu.active .teamMenuLink { color:var(--bright-gold); opacity:1; }
+.teamMenu.open .teamMenuToggle span { transform:rotate(180deg); }
 .teamDropdown {
   position:absolute; z-index:80; top:calc(100% + 14px); left:50%; width:205px; padding:10px;
   display:none; transform:translateX(-50%); background:#020713;
   border:1px solid rgba(201,154,46,.48); box-shadow:0 20px 45px rgba(0,0,0,.42);
 }
 .teamDropdown::before { content:""; position:absolute; left:0; right:0; top:-14px; height:14px; }
-.teamMenu:hover .teamDropdown,.teamMenu:focus-within .teamDropdown,.teamMenu[open] .teamDropdown { display:grid; }
+.teamMenu:hover .teamDropdown,.teamMenu:focus-within .teamDropdown,.teamMenu.open .teamDropdown { display:grid; }
 .navLinks .teamDropdown a {
   min-height:42px; padding:0 13px; display:flex; align-items:center;
   color:rgba(255,255,255,.78); opacity:1; border-bottom:1px solid rgba(255,255,255,.09);
@@ -909,21 +909,42 @@ html,body { width:100%; overflow-x:hidden; }
 .navLinks .teamDropdown a:last-child { border-bottom:0; }
 .navLinks .teamDropdown a:hover,.navLinks .teamDropdown a:focus-visible { color:#06132a; background:linear-gradient(115deg,#a97516,#f5df9a 45%,#d5a536); }
 
-.teamSeasonGrid {
-  display:grid; grid-template-columns:1fr 1fr; gap:1px; padding:1px;
-  background:#c99a2e; border-top:1px solid #c99a2e; border-bottom:1px solid #c99a2e;
+.teamProgramsHero {
+  min-height:630px; padding:175px 7vw 95px; display:flex; flex-direction:column; justify-content:flex-end;
+  color:#fff; background:radial-gradient(circle at 82% 28%,#173f84 0%,#071a39 28%,#020713 72%);
+  border-bottom:1px solid rgba(201,154,46,.3);
 }
-.teamSeasonGrid>a {
-  min-height:430px; padding:70px 6.5vw; display:flex; flex-direction:column; justify-content:flex-end;
-  color:#fff; background:radial-gradient(circle at 80% 20%,#153f86,#071a39 42%,#020713 78%);
-  transition:filter .25s ease,transform .25s ease;
+.teamProgramsHero h1 { max-width:980px; font-size:clamp(70px,8.2vw,124px); line-height:.84; }
+.teamProgramsHero h1 em { color:#f5df9a; font-weight:400; }
+.teamProgramsHero>p:last-child { max-width:670px; margin:34px 0 0; color:rgba(255,255,255,.64); font:18px/1.7 Georgia,serif; }
+.teamProgramsCatalog { padding:105px 7vw 125px; background:#f5f2e9; }
+.teamProgramsIntro { display:grid; grid-template-columns:1fr 430px; gap:70px; align-items:end; margin-bottom:62px; }
+.teamProgramsIntro>div>span { color:#9a701c; font-size:9px; font-weight:800; letter-spacing:.24em; }
+.teamProgramsIntro h2 { margin:30px 0 0; font-size:clamp(50px,6vw,84px); line-height:.94; }
+.teamProgramsIntro h2 em { color:#b48420; font-weight:400; }
+.teamProgramsIntro>p { margin:0; color:#687181; line-height:1.8; }
+.teamProgramGrid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.teamProgramCard {
+  min-height:660px; display:flex; flex-direction:column; color:#182113; background:#fff;
+  border:1px solid #dcd6c8; transition:border-color .25s ease,box-shadow .25s ease,transform .25s ease;
 }
-.teamSeasonGrid>a:nth-child(2) { background:radial-gradient(circle at 75% 25%,#1b55a3,#0a2b63 42%,#020713 82%); }
-.teamSeasonGrid>a:hover { filter:brightness(1.12); }
-.teamSeasonGrid small { color:#d7ae52; font-size:9px; font-weight:800; letter-spacing:.24em; }
-.teamSeasonGrid strong { margin:22px 0 32px; font:clamp(46px,5vw,76px)/.95 Georgia,serif; }
-.teamSeasonGrid strong em { color:#f5df9a; font-weight:400; }
-.teamSeasonGrid span { width:max-content; padding-bottom:8px; border-bottom:1px solid #c99a2e; font-size:9px; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.teamProgramCard:hover { border-color:#c99a2e; box-shadow:0 24px 55px rgba(2,7,19,.12); transform:translateY(-5px); }
+.teamProgramCard figure { height:340px; margin:0; position:relative; overflow:hidden; background:#061633; }
+.teamProgramCard figure>img { width:100%; height:100%; object-fit:cover; }
+.teamProgramCard figure>span,.teamProgramCard figure>i {
+  position:absolute; top:22px; width:42px; height:42px; display:grid; place-items:center;
+  color:#fff; background:rgba(2,7,19,.82); border:1px solid rgba(245,223,154,.38);
+  font:normal 11px Georgia,serif;
+}
+.teamProgramCard figure>span { left:22px; }.teamProgramCard figure>i { right:22px; color:#f5df9a; font-size:18px; }
+.teamProgramCard .teamProgramCrest { display:grid; place-items:center; background:radial-gradient(circle at 50% 42%,#1a4d99,#071a39 48%,#020713 82%); }
+.teamProgramCard .teamProgramCrest>img { width:54%; height:auto; object-fit:contain; border:1px solid rgba(245,223,154,.55); box-shadow:0 24px 55px rgba(0,0,0,.42); }
+.teamProgramCard>div { flex:1; padding:34px; display:flex; flex-direction:column; }
+.teamProgramCard small { color:#9a701c; font-size:8px; font-weight:800; letter-spacing:.18em; }
+.teamProgramCard h2 { margin:22px 0 18px; font:42px/1.02 Georgia,serif; }
+.teamProgramCard p { margin:0; color:#687181; font-size:13px; line-height:1.75; }
+.teamProgramCard strong { margin-top:auto; padding-top:30px; color:#182113; font-size:9px; letter-spacing:.16em; text-transform:uppercase; }
+.teamProgramCard strong span { margin-left:8px; color:#b48420; font-size:15px; }
 .seasonSwitch {
   padding:38px 6.5vw; display:flex; align-items:center; justify-content:center; gap:12px;
   color:#fff; background:#020713; border-top:1px solid rgba(201,154,46,.3);
@@ -933,19 +954,25 @@ html,body { width:100%; overflow-x:hidden; }
 .seasonSwitch a:hover,.seasonSwitch a.active { color:#06132a; background:linear-gradient(115deg,#a97516,#f5df9a 45%,#d5a536); border-color:#f5df9a; }
 
 @media(max-width:760px){
-  .nav .teamMenu { display:flex; align-items:center; }
-  .nav .teamMenu summary {
-    min-height:38px; padding:0 13px; border:1px solid rgba(245,223,154,.2);
-    font-size:9px; letter-spacing:.11em; white-space:nowrap;
-  }
+  .nav .teamMenu { display:flex; align-items:center; border:1px solid rgba(245,223,154,.2); }
+  .nav .teamMenuLink { padding:0 6px 0 13px; border:0; font-size:9px; letter-spacing:.11em; white-space:nowrap; }
+  .nav .teamMenuToggle { width:30px; border-left:1px solid rgba(245,223,154,.2); }
   .nav .teamMenu:hover .teamDropdown,.nav .teamMenu:focus-within .teamDropdown { display:none; }
-  .nav .teamMenu[open] .teamDropdown {
+  .nav .teamMenu.open .teamDropdown {
     position:static; width:auto; margin-left:8px; padding:0; display:flex; transform:none;
     background:transparent; border:0; box-shadow:none;
   }
   .navLinks .teamDropdown a { min-height:38px; border:1px solid rgba(245,223,154,.2); }
-  .teamSeasonGrid { grid-template-columns:1fr; }
-  .teamSeasonGrid>a { min-height:330px; padding:55px 24px; }
+  .teamProgramsHero { min-height:560px; padding:155px 20px 70px; }
+  .teamProgramsHero h1 { font-size:clamp(54px,16vw,76px); }
+  .teamProgramsHero>p:last-child { font-size:16px; }
+  .teamProgramsCatalog { padding:72px 20px 82px; }
+  .teamProgramsIntro { grid-template-columns:1fr; gap:26px; margin-bottom:42px; }
+  .teamProgramsIntro h2 { font-size:50px; }
+  .teamProgramGrid { grid-template-columns:1fr; }
+  .teamProgramCard { min-height:590px; }
+  .teamProgramCard figure { height:290px; }
+  .teamProgramCard h2 { font-size:36px; }
   .seasonSwitch { padding:32px 20px; flex-wrap:wrap; }
   .seasonSwitch>span { width:100%; margin:0 0 8px; text-align:center; }
 }

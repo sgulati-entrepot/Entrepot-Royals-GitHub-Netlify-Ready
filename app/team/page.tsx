@@ -16,29 +16,46 @@ export default function TeamPage() {
         <HeaderSocials /><Link className="navCta" href="/owners">Our leadership ↗</Link>
       </nav>
 
-      <header className="pageHero teamHero teamIndexHero">
-        <div>
-          <p className="eyebrow"><span /> THE ROYAL SQUADS</p>
-          <h1>CHOOSE YOUR<br /><em>ROYAL ERA</em></h1>
-          <p>Explore the players who wore the Entrepot Royals crest in each season.</p>
-        </div>
-        <div className="teamHeroPortrait">
-          <Logo className="teamHeroCrest" />
-          <span>ENTREPOT ROYALS · OFFICIAL TEAM ARCHIVE</span>
-        </div>
+      <header className="teamProgramsHero">
+        <p className="eyebrow"><span /> TEAM MEMBERS</p>
+        <h1>TEAMS BUILT FOR<br /><em>ROYAL PROGRESS.</em></h1>
+        <p>Two seasons. One crest. Explore the players, personalities and shared purpose behind every Entrepot Royals chapter.</p>
       </header>
 
-      <section className="teamSeasonGrid" aria-label="Entrepot Royals teams by season">
-        <Link href="/team/2025">
-          <small>OUR FIRST CHAPTER</small>
-          <strong>TEAM OF <em>2025</em></strong>
-          <span>Meet the 2025 Royals ↗</span>
-        </Link>
-        <Link href="/team/2026">
-          <small>THE CURRENT SQUAD</small>
-          <strong>TEAM OF <em>2026</em></strong>
-          <span>Meet the 2026 Royals ↗</span>
-        </Link>
+      <section className="teamProgramsCatalog" aria-label="Entrepot Royals teams by season">
+        <div className="teamProgramsIntro">
+          <div>
+            <span>02 / ROYAL SQUADS</span>
+            <h2>Choose your next<br /><em>Royal chapter.</em></h2>
+          </div>
+          <p>Each season carries its own moments, challenges and names—united by the same Royal standard.</p>
+        </div>
+        <div className="teamProgramGrid">
+          <Link className="teamProgramCard" href="/team/2025">
+            <figure>
+              <img src="/royal-moment-team-2025-enhanced.png" alt="Entrepot Royals team of 2025" />
+              <span>01</span><i aria-hidden="true">↗</i>
+            </figure>
+            <div>
+              <small>2025 SEASON · THE FIRST CHAPTER</small>
+              <h2>Team of 2025</h2>
+              <p>Meet the squad that carried the crest through our opening campaign and began the Entrepot Royals legacy.</p>
+              <strong>View team <span>→</span></strong>
+            </div>
+          </Link>
+          <Link className="teamProgramCard" href="/team/2026">
+            <figure className="teamProgramCrest">
+              <Logo />
+              <span>02</span><i aria-hidden="true">↗</i>
+            </figure>
+            <div>
+              <small>2026 SEASON · THE NEXT CHAPTER</small>
+              <h2>Team of 2026</h2>
+              <p>Discover the current Royals preparing to compete with belief, discipline and one shared purpose.</p>
+              <strong>View team <span>→</span></strong>
+            </div>
+          </Link>
+        </div>
       </section>
 
       <Footer />
