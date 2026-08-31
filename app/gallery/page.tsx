@@ -9,7 +9,6 @@ const Logo = ({ className = "" }: { className?: string }) => (
 
 const moments = [
   { src: "/runner-up-mini-tournament-01-enhanced.png", title: "First Runner-Up — Mini Tournament", category: "A Proud Royal Finish", alt: "Entrepot Royals celebrating their first runner-up finish in the 2025 mini tournament with trophies", fit: "contain" },
-  { src: "/runner-up-mini-tournament-02-enhanced.png", title: "The Runner-Up Celebration", category: "Mini Tournament · 2025", alt: "Entrepot Royals players and fellow competitors holding trophies after the 2025 mini tournament", fit: "contain" },
   { src: "/royal-moment-team-2025-enhanced.png", title: "The 2025 Royals", category: "Team of 2025", alt: "Entrepot Royals players together in the 2025 team kit", fit: "contain" },
   { src: "/royal-moment-squad-backs-enhanced.png", title: "Names Behind the Crest", category: "Squad Unity", alt: "Entrepot Royals players displaying their names and jersey numbers", fit: "contain" },
   { src: "/royal-moment-trophy-enhanced.png", title: "A Royal Triumph", category: "Trophy Moment", alt: "Entrepot Royals players celebrating together with a trophy" },
@@ -43,7 +42,7 @@ export default function GalleryPage() {
 
         <div className="galleryYearHeading galleryYear2025">
           <div><small>THE FIRST CHAPTER</small><h3>MOMENTS OF <em>2025</em></h3></div>
-          <span>09 ROYAL MOMENTS</span>
+          <span>08 ROYAL MOMENTS</span>
         </div>
         <div className="momentsGrid moments2025">
           {moments.map((moment, index) => (

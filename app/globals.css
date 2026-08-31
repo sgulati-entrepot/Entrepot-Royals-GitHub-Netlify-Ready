@@ -1499,3 +1499,30 @@ html,body { width:100%; overflow-x:hidden; }
 .homeFixtureRow:last-child{border-bottom:0}
 .homeFixtureRow:hover{background:#123f86}
 @media(max-width:650px){.homeFixtureList{padding:0 16px}}
+
+/* Keep all three header social icons separated at every viewport size. */
+.headerSocials{flex-wrap:nowrap;min-width:max-content;gap:9px;margin-left:10px}
+.headerSocials a{flex:0 0 auto}
+@media(max-width:760px){
+  .headerSocials{gap:6px;margin-left:0}
+  .headerSocials a{width:34px;height:34px}
+}
+@media(max-width:480px){.nav .brand span{display:none}}
+
+/* High-contrast phrases for every Royal Moments photograph. */
+.momentCard::after{
+  inset:22% 0 0;
+  background:linear-gradient(180deg,transparent 0%,rgba(1,6,17,.48) 42%,rgba(1,6,17,.96) 100%);
+}
+.momentCard figcaption small{
+  color:#f5d66f;
+  text-shadow:0 2px 12px rgba(0,0,0,.95);
+}
+.momentCard figcaption strong{
+  color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,.98);
+}
+.momentCard figcaption span{
+  color:#f5df9a;
+  text-shadow:0 2px 12px rgba(0,0,0,.95);
+}
