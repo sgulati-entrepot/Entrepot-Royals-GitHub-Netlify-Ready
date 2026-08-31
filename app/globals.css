@@ -1308,7 +1308,7 @@ html,body { width:100%; overflow-x:hidden; }
 .teamProgramsHero>div:first-child { position:relative; z-index:3; max-width:700px; }
 
 .ownersHeroMedia .landingHeroPhoto { object-position:68% center!important; }
-.teamIndexHeroMedia .landingHeroPhoto { object-position:62% center!important; }
+.teamIndexHeroMedia .landingHeroPhoto { object-position:66% center!important; }
 .team2025HeroMedia .landingHeroPhoto { object-position:62% center!important; }
 .team2026HeroMedia .landingHeroPhoto { object-position:72% center!important; }
 .galleryHeroMedia .landingHeroPhoto { object-position:68% 34%!important; }
