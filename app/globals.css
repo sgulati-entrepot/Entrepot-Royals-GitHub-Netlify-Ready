@@ -1311,9 +1311,10 @@ html,body { width:100%; overflow-x:hidden; }
 .teamIndexHeroMedia .landingHeroPhoto { object-position:66% center!important; }
 .team2025HeroMedia .landingHeroPhoto { object-position:62% center!important; }
 .team2026HeroMedia .landingHeroPhoto { object-position:72% center!important; }
-.galleryHeroMedia .landingHeroPhoto { object-position:68% 34%!important; }
-.supportersHeroVisual.landingHeroMedia .landingHeroPhoto { height:100%; object-position:66% 35%!important; }
-.blogHero .landingHeroPhoto { object-position:64% center!important; }
+.galleryHeroMedia .landingHeroPhoto { object-position:69% center!important; }
+.supportersHeroVisual.landingHeroMedia .landingHeroPhoto { height:100%; object-position:70% center!important; }
+.testimonialsHeroMedia .landingHeroPhoto { object-position:68% center!important; }
+.blogsHeroMedia .landingHeroPhoto { object-position:70% center!important; }
 .contactHero .landingHeroPhoto { object-position:70% 28%!important; }
 
 .fixturesHero { isolation:isolate; }
@@ -1351,7 +1352,10 @@ html,body { width:100%; overflow-x:hidden; }
   }
   .ownersHeroMedia .landingHeroPhoto{object-position:66% center!important}
   .contactHero .landingHeroPhoto{object-position:58% 25%!important}
-  .galleryHeroMedia .landingHeroPhoto,.supportersHeroVisual.landingHeroMedia .landingHeroPhoto,.teamIndexHeroMedia .landingHeroPhoto,.team2025HeroMedia .landingHeroPhoto{object-position:center!important}
+  .galleryHeroMedia .landingHeroPhoto{object-position:72% center!important}
+  .supportersHeroVisual.landingHeroMedia .landingHeroPhoto{object-position:72% center!important}
+  .testimonialsHeroMedia .landingHeroPhoto,.blogsHeroMedia .landingHeroPhoto{object-position:74% center!important}
+  .teamIndexHeroMedia .landingHeroPhoto,.team2025HeroMedia .landingHeroPhoto{object-position:center!important}
 }
 
 /* Let the elegant home photograph lead; retain the crest as a quiet brand signature. */

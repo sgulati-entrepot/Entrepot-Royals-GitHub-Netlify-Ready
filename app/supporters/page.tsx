@@ -47,7 +47,7 @@ export default function SupportersPage() {
           <p>They bring the energy, carry the colours and make every Royal moment louder. This page celebrates the family behind the team.</p>
           <a className="goldButton" href="#supporter-stories">Meet the Royal family <span aria-hidden="true">↓</span></a>
         </div>
-        <LandingHeroMedia photo="/royal-moment-family-support-enhanced.png" alt="The Entrepot Royals supporter family wearing team jerseys" caption="ONE CREST · ONE FAMILY · ONE ROAR" className="supportersHeroVisual" />
+        <LandingHeroMedia photo="/supporters-hero-elegant.jpg" alt="A multigenerational cricket supporter family overlooking a floodlit ground" caption="ONE CREST · ONE FAMILY · ONE ROAR" className="supportersHeroVisual" />
       </header>
 
       <section className="supportersIntro" id="supporter-stories">

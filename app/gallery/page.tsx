@@ -30,7 +30,7 @@ export default function GalleryPage() {
 
       <header className="galleryHero">
         <div><p className="eyebrow"><span /> THROUGH THE ROYAL LENS</p><h1>ROYAL MOMENTS<br /><em>GALLERY</em></h1><p>Celebrating the people, matches and memories that shape the Entrepot Royals journey.</p></div>
-        <LandingHeroMedia photo="/royal-moment-trophy-enhanced.png" alt="Entrepot Royals players celebrating with a trophy" caption="EVERY MOMENT · ONE LEGACY" className="galleryHeroMedia" />
+        <LandingHeroMedia photo="/royal-moments-hero-elegant.jpg" alt="A united cricket team lifting a gold trophy on a floodlit ground" caption="EVERY MOMENT · ONE LEGACY" className="galleryHeroMedia" />
       </header>
 
       <section className="gallerySection">

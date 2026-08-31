@@ -19,7 +19,7 @@ export default function FixturesPage() {
 
       <header className="fixturesHero">
         <div><p className="eyebrow"><span /> THE ROYAL MATCH CENTRE</p><h1>FIXTURES<br /><em>& RESULTS</em></h1><p>Every fixture. Every result. Every step of the Entrepot Royals RECL campaign.</p></div>
-        <img className="fixturesHeroPhoto" src="/cricket-hero-royal-kit.png" alt="Cricketer playing in Entrepot Royals colours under stadium lights" />
+        <img className="fixturesHeroPhoto" src="/fixtures-hero-elegant.jpg" alt="Cricket stumps and a red ball on a lush floodlit ground before a fixture" />
         <div className="fixtureHeroCard"><small>NEXT MATCH</small><div><Logo className="fixtureLogo" /><span>VS</span><div className="tbcCrest">?</div></div><strong>DETAILS TO BE ANNOUNCED</strong></div>
       </header>
 
