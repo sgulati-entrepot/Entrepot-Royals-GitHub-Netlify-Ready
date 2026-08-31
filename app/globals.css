@@ -1536,3 +1536,10 @@ html,body { width:100%; overflow-x:hidden; }
   .headerSocials{position:relative;z-index:30;flex:0 0 auto;gap:7px;margin-left:6px}
   .headerSocials a{width:30px;height:30px}
 }
+
+/* Compact the desktop tabs and preserve a clear social-media zone. */
+@media(min-width:761px){
+  .navLinks{gap:clamp(4px,.45vw,8px)}
+  .teamMenuToggle,.insightsMenuToggle{width:12px}
+  .headerSocials{margin-left:18px}
+}
