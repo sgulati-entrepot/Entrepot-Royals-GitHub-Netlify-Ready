@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
+import LandingHeroMedia from "../components/LandingHeroMedia";
 import TeamMenu from "../components/TeamMenu";
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -46,10 +47,7 @@ export default function SupportersPage() {
           <p>They bring the energy, carry the colours and make every Royal moment louder. This page celebrates the family behind the team.</p>
           <a className="goldButton" href="#supporter-stories">Meet the Royal family <span aria-hidden="true">↓</span></a>
         </div>
-        <div className="supportersHeroVisual">
-          <img src="/royal-moment-family-support-enhanced.png" alt="The Entrepot Royals supporter family wearing team jerseys" />
-          <span>ONE CREST · ONE FAMILY · ONE ROAR</span>
-        </div>
+        <LandingHeroMedia photo="/royal-moment-family-support-enhanced.png" alt="The Entrepot Royals supporter family wearing team jerseys" caption="ONE CREST · ONE FAMILY · ONE ROAR" className="supportersHeroVisual" />
       </header>
 
       <section className="supportersIntro" id="supporter-stories">

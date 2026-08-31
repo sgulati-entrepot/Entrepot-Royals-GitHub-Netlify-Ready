@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
+import LandingHeroMedia from "../components/LandingHeroMedia";
 import TeamMenu from "../components/TeamMenu";
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -17,9 +18,12 @@ export default function TeamPage() {
       </nav>
 
       <header className="teamProgramsHero">
-        <p className="eyebrow"><span /> TEAM MEMBERS</p>
-        <h1>TEAMS BUILT FOR<br /><em>ROYAL PROGRESS.</em></h1>
-        <p>Two seasons. One crest. Explore the players, personalities and shared purpose behind every Entrepot Royals chapter.</p>
+        <div>
+          <p className="eyebrow"><span /> TEAM MEMBERS</p>
+          <h1>TEAMS BUILT FOR<br /><em>ROYAL PROGRESS.</em></h1>
+          <p>Two seasons. One crest. Explore the players, personalities and shared purpose behind every Entrepot Royals chapter.</p>
+        </div>
+        <LandingHeroMedia photo="/royal-moment-team-2025-enhanced.png" alt="Entrepot Royals players together in team colours" caption="ONE CREST · EVERY SEASON" className="teamIndexHeroMedia" />
       </header>
 
       <section className="teamProgramsCatalog" aria-label="Entrepot Royals teams by season">

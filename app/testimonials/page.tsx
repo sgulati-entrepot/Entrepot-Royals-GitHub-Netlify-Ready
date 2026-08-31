@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
+import LandingHeroMedia from "../components/LandingHeroMedia";
 import TeamMenu from "../components/TeamMenu";
 
 const Logo = () => <img className="brandLogo" src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" />;
@@ -13,7 +14,7 @@ const voices = [
 export default function TestimonialsPage() {
   return <main className="editorialPage">
     <nav className="nav innerNav" aria-label="Main navigation"><a className="brand" href="/"><Logo /><span><b>ENTREPOT</b><strong>ROYALS</strong></span></a><div className="navLinks"><a href="/">Home</a><TeamMenu /><a href="/gallery">Royal Moments</a><a href="/supporters">Supporters</a><a className="active" href="/testimonials">Testimonials</a></div><HeaderSocials /><a className="navCta" href="/contact">Contact us ↗</a></nav>
-    <header className="editorialHero"><p className="eyebrow"><span /> VOICES OF THE ROYAL FAMILY</p><h1>ROYAL<br /><em>TESTIMONIALS</em></h1><p>What it means to wear the crest, stand by the boundary and rise together as one Royal family.</p></header>
+    <header className="editorialHero"><div className="editorialHeroCopy"><p className="eyebrow"><span /> VOICES OF THE ROYAL FAMILY</p><h1>ROYAL<br /><em>TESTIMONIALS</em></h1><p>What it means to wear the crest, stand by the boundary and rise together as one Royal family.</p></div><LandingHeroMedia photo="/royal-supporters-together.jpg" alt="Entrepot Royals supporters celebrating together" caption="VOICES OF THE ROYAL FAMILY" /></header>
     <section className="testimonialGrid" aria-label="Entrepot Royals testimonials">{voices.map((voice) => <article key={voice.mark}><span>{voice.mark}</span><small>{voice.title}</small><blockquote>“{voice.quote}”</blockquote><p>— {voice.source}</p></article>)}</section>
     <section className="editorialCta"><p className="sectionLabel light">SHARE THE ROAR</p><h2>PART OF THE<br /><em>ROYAL STORY?</em></h2><p>We would love to hear what Entrepot Royals means to you.</p><a className="goldButton" href="mailto:royals@entrepot.in?subject=My%20Royal%20Testimonial">Send your testimonial ↗</a></section>
     <Footer />

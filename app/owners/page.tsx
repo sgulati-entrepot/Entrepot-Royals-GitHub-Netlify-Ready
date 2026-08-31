@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
+import LandingHeroMedia from "../components/LandingHeroMedia";
 import TeamMenu from "../components/TeamMenu";
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -17,7 +18,7 @@ export default function OwnersPage() {
 
       <header className="pageHero ownersHero">
         <div><p className="eyebrow"><span /> BEHIND THE ROYALS</p><h1>TEAM<br /><em>OWNERS</em></h1><p>Leadership with vision, passion and an unwavering belief in the team.</p></div>
-        <Logo className="pageLogo" />
+        <LandingHeroMedia photo="/sajeev-gulati-enhanced.png" alt="Sajeev Gulati representing Entrepot Royals leadership" caption="LEADERSHIP · VISION · ROYAL PURPOSE" className="ownersHeroMedia" />
       </header>
 
       <section className="profileSection">

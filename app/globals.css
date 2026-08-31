@@ -976,3 +976,83 @@ html,body { width:100%; overflow-x:hidden; }
   .seasonSwitch { padding:32px 20px; flex-wrap:wrap; }
   .seasonSwitch>span { width:100%; margin:0 0 8px; text-align:center; }
 }
+
+/* Large photographic hero system */
+.landingHeroMedia {
+  width:min(480px,100%); padding:12px 12px 0; position:relative; justify-self:center;
+  background:rgba(1,6,17,.78); border:1px solid rgba(245,223,154,.58);
+  box-shadow:22px 22px 0 rgba(201,154,46,.1),0 38px 85px rgba(0,0,0,.5);
+}
+.landingHeroMedia .landingHeroPhoto {
+  width:100%; height:470px; display:block; object-fit:cover; object-position:center;
+}
+.landingHeroMedia .landingHeroCrest {
+  position:absolute; z-index:2; right:-24px; bottom:38px; width:112px; height:112px;
+  padding:5px; object-fit:cover; aspect-ratio:1; background:#061633;
+  border:2px solid #e9c95a; box-shadow:0 16px 34px rgba(0,0,0,.48);
+}
+.landingHeroMedia>span {
+  display:block; padding:17px 8px 16px; color:#f5df9a;
+  font-size:8px; font-weight:800; letter-spacing:.24em; text-align:center;
+}
+.ownersHeroMedia .landingHeroPhoto { object-position:50% 35%; }
+.galleryHeroMedia .landingHeroPhoto { object-position:50% 30%; }
+.team2025HeroMedia .landingHeroPhoto { object-position:center; }
+.team2026HeroMedia .landingHeroPhoto { object-position:67% center; }
+
+.heroBackdropPhoto {
+  position:absolute; z-index:0; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;
+  opacity:.42; filter:saturate(.9) contrast(1.08);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 35%,#000 72%);
+}
+.heroCopy,.hero .crestWrap,.hero .scrollHint { z-index:3; }
+.hero .crestWrap { filter:drop-shadow(0 28px 44px rgba(0,0,0,.5)); }
+
+.fixturesHeroPhoto {
+  position:absolute; z-index:0; top:0; right:0; width:62%; height:100%;
+  object-fit:cover; object-position:68% center; opacity:.38;
+  mask-image:linear-gradient(90deg,transparent,#000 52%);
+}
+.fixturesHero>div:first-child,.fixtureHeroCard { position:relative; z-index:2; }
+
+.editorialHero {
+  min-height:720px; display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,480px); gap:7vw;
+  align-items:center; justify-content:initial;
+}
+.editorialHeroCopy { position:relative; z-index:2; }
+.editorialHero h1 { font-size:clamp(58px,5.7vw,88px); }
+.editorialHeroCopy>p:last-child { max-width:620px; margin:0; color:rgba(255,255,255,.62); font:18px/1.75 Georgia,serif; }
+.editorialHero .landingHeroMedia { align-self:center; }
+.blogHero .landingHeroPhoto { object-position:center; }
+.contactHero .landingHeroPhoto { object-position:center; }
+
+.teamProgramsHero {
+  min-height:720px; display:grid; grid-template-columns:1.08fr .92fr; gap:7vw;
+  align-items:center; justify-content:initial;
+}
+.teamProgramsHero>div:first-child { position:relative; z-index:2; }
+.teamProgramsHero>div:first-child>p:last-child { max-width:650px; margin:34px 0 0; color:rgba(255,255,255,.64); font:18px/1.7 Georgia,serif; }
+.teamIndexHeroMedia .landingHeroPhoto { object-position:center; }
+
+.supportersHeroVisual.landingHeroMedia { padding:12px 12px 0; }
+.supportersHeroVisual.landingHeroMedia .landingHeroPhoto { height:500px; aspect-ratio:auto; object-position:50% 35%; }
+.supportersHeroVisual.landingHeroMedia .landingHeroCrest { width:112px; height:112px; aspect-ratio:1; object-fit:cover; }
+
+@media(max-width:900px){
+  .editorialHero,.teamProgramsHero { grid-template-columns:1fr; padding-top:145px; text-align:center; }
+  .editorialHero .eyebrow,.teamProgramsHero .eyebrow { justify-content:center; }
+  .editorialHeroCopy>p:last-child,.teamProgramsHero>div:first-child>p:last-child { margin-left:auto; margin-right:auto; }
+  .landingHeroMedia { width:min(470px,86vw); margin-top:34px; }
+}
+@media(max-width:650px){
+  .landingHeroMedia { width:min(100%,420px); padding:9px 9px 0; box-shadow:12px 12px 0 rgba(201,154,46,.1),0 26px 60px rgba(0,0,0,.45); }
+  .landingHeroMedia .landingHeroPhoto,.supportersHeroVisual.landingHeroMedia .landingHeroPhoto { height:390px; }
+  .landingHeroMedia .landingHeroCrest,.supportersHeroVisual.landingHeroMedia .landingHeroCrest {
+    right:-8px; bottom:34px; width:84px; height:84px;
+  }
+  .editorialHero,.teamProgramsHero { min-height:0; padding:135px 20px 70px; gap:12px; }
+  .editorialHero h1,.teamProgramsHero h1 { font-size:clamp(52px,15vw,70px); }
+  .editorialHeroCopy>p:last-child,.teamProgramsHero>div:first-child>p:last-child { font-size:16px; }
+  .fixturesHeroPhoto { width:100%; opacity:.28; mask-image:linear-gradient(180deg,transparent,#000 45%); }
+  .heroBackdropPhoto { opacity:.3; object-position:68% center; }
+}

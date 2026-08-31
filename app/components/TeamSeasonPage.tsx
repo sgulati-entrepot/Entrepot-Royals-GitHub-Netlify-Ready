@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "./Footer";
 import HeaderSocials from "./HeaderSocials";
+import LandingHeroMedia from "./LandingHeroMedia";
 import TeamMenu from "./TeamMenu";
 
 export type TeamPlayer = {
@@ -39,10 +40,12 @@ export default function TeamSeasonPage({
           <h1>TEAM OF<br /><em>{season}</em></h1>
           <p>{introduction}</p>
         </div>
-        <div className="teamHeroPortrait">
-          <Logo className="teamHeroCrest" />
-          <span>ENTREPOT ROYALS · TEAM OF {season}</span>
-        </div>
+        <LandingHeroMedia
+          photo={season === "2025" ? "/royal-moment-team-2025-enhanced.png" : "/cricket-hero-royal-kit.png"}
+          alt={season === "2025" ? "Entrepot Royals team of 2025" : "Cricketer in Entrepot Royals colours"}
+          caption={`ENTREPOT ROYALS · TEAM OF ${season}`}
+          className={season === "2025" ? "team2025HeroMedia" : "team2026HeroMedia"}
+        />
       </header>
 
       <section className="rosterSection">

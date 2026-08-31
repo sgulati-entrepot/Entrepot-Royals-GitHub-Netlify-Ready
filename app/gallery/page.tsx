@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
 import HeaderSocials from "../components/HeaderSocials";
+import LandingHeroMedia from "../components/LandingHeroMedia";
 import TeamMenu from "../components/TeamMenu";
 
 const Logo = ({ className = "" }: { className?: string }) => (
@@ -29,7 +30,7 @@ export default function GalleryPage() {
 
       <header className="galleryHero">
         <div><p className="eyebrow"><span /> THROUGH THE ROYAL LENS</p><h1>ROYAL MOMENTS<br /><em>GALLERY</em></h1><p>Celebrating the people, matches and memories that shape the Entrepot Royals journey.</p></div>
-        <div className="galleryHeroMark"><Logo className="galleryHeroLogo" /><span>EVERY MOMENT · ONE LEGACY</span></div>
+        <LandingHeroMedia photo="/royal-moment-trophy-enhanced.png" alt="Entrepot Royals players celebrating with a trophy" caption="EVERY MOMENT · ONE LEGACY" className="galleryHeroMedia" />
       </header>
 
       <section className="gallerySection">

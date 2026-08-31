@@ -32,6 +32,7 @@ export default function Home() {
       </nav>
 
       <section className="hero" id="home">
+        <img className="heroBackdropPhoto" src="/cricket-hero-royal-kit.png" alt="Cricketer playing under stadium lights in Entrepot Royals colours" />
         <div className="heroLines" aria-hidden="true" />
         <div className="heroCopy">
           <p className="eyebrow"><span /> GATEWAY TO THE ROYAL STANDARD</p>
