@@ -36,7 +36,7 @@ export default function Home() {
           </p>
           <div className="heroActions">
             <a className="goldButton" href="/team">Meet the Royals <Arrow /></a>
-            <a className="textLink" href="#recl"><span className="play">▶</span> Our RECL journey</a>
+            <a className="textLink" href="/our-story#recl"><span className="play">▶</span> Our RECL journey</a>
           </div>
           <div className="heroRoyalStats" aria-label="Entrepot Royals highlights">
             <div><strong>2025</strong><span>ROYAL LEGACY BEGAN</span></div>
@@ -91,25 +91,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="statement" id="legacy">
-        <p className="sectionLabel">01 · OUR LEGACY</p>
-        <div className="statementGrid">
-          <h2>NOT JUST A TEAM.<br /><em>A ROYAL STANDARD.</em></h2>
-          <div>
-            <p className="lead">
-              Entrepot Royals is a collective of competitors who play with
-              courage, composure and complete commitment to the crest.
-            </p>
-            <p>
-              Every over is an opportunity. Every partnership is built on
-              trust. Every time we step onto the field, we carry one ambition:
-              to set a standard worthy of the name Royals.
-            </p>
-          </div>
-        </div>
-        <div className="royalWord" aria-hidden="true">ROYAL</div>
-      </section>
-
       <section className="codeSection" id="code">
         <div className="codeIntro">
           <p className="sectionLabel light">02 · THE ROYAL CODE</p>
@@ -137,30 +118,6 @@ export default function Home() {
             <h3>PRIDE</h3>
             <p>We respect the game, the opposition and the crest we represent.</p>
           </article>
-        </div>
-      </section>
-
-      <section className="recl" id="recl">
-        <div className="reclBadge">
-          <span className="reclCrown" aria-hidden="true">♛</span>
-          <span className="reclMonogram">RECL</span>
-          <small>RISE OF THE ROYALS</small>
-          <i aria-hidden="true">EST. 2025</i>
-        </div>
-        <div className="reclCopy">
-          <p className="sectionLabel">03 · OUR RECL JOURNEY</p>
-          <h2>THE DEBUT<br />WAS ONLY THE<br /><em>BEGINNING.</em></h2>
-          <p>
-            Last season marked our first chapter in RECL—a campaign that tested
-            our character, strengthened our bond and showed us what the next
-            level demands. We return with experience in our game and fire in
-            our hearts.
-          </p>
-          <div className="seasonLine">
-            <div><strong>01</strong><span>DEBUT<br />SEASON</span></div>
-            <div><strong>01</strong><span>ROYAL<br />FAMILY</span></div>
-            <div><strong>∞</strong><span>AMBITION<br />WITHOUT LIMITS</span></div>
-          </div>
         </div>
       </section>
 
