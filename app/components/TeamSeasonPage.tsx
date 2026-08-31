@@ -41,8 +41,8 @@ export default function TeamSeasonPage({
           <p>{introduction}</p>
         </div>
         <LandingHeroMedia
-          photo={season === "2025" ? "/royal-moment-team-2025-enhanced.png" : "/cricket-hero-royal-kit.png"}
-          alt={season === "2025" ? "Entrepot Royals team of 2025" : "Cricketer in Entrepot Royals colours"}
+          photo={season === "2025" ? "/team-2025-hero-elegant.jpg" : "/cricket-hero-royal-kit.png"}
+          alt={season === "2025" ? "The Entrepot Royals 2025 cricket squad united in a pre-match huddle" : "Cricketer in Entrepot Royals colours"}
           caption={`ENTREPOT ROYALS · TEAM OF ${season}`}
           className={season === "2025" ? "team2025HeroMedia" : "team2026HeroMedia"}
         />
@@ -73,8 +73,8 @@ export default function TeamSeasonPage({
 
       <section className="seasonSwitch" aria-label="Browse another Entrepot Royals season">
         <span>EXPLORE ANOTHER SEASON</span>
-        <Link className={season === "2025" ? "active" : ""} href="/team/2025">Team of 2025</Link>
         <Link className={season === "2026" ? "active" : ""} href="/team/2026">Team of 2026</Link>
+        <Link className={season === "2025" ? "active" : ""} href="/team/2025">Team of 2025</Link>
       </section>
 
       <section className="quoteBand goldBand"><p>The Royals are ready to roar.</p><Link href="/">Return home →</Link></section>

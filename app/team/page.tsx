@@ -35,27 +35,27 @@ export default function TeamPage() {
           <p>Each season carries its own moments, challenges and names—united by the same Royal standard.</p>
         </div>
         <div className="teamProgramGrid">
-          <Link className="teamProgramCard" href="/team/2025">
-            <figure>
-              <img src="/royal-moment-team-2025-enhanced.png" alt="Entrepot Royals team of 2025" />
-              <span>01</span><i aria-hidden="true">↗</i>
-            </figure>
-            <div>
-              <small>2025 SEASON · THE FIRST CHAPTER</small>
-              <h2>Team of 2025</h2>
-              <p>Meet the squad that carried the crest through our opening campaign and began the Entrepot Royals legacy.</p>
-              <strong>View team <span>→</span></strong>
-            </div>
-          </Link>
           <Link className="teamProgramCard" href="/team/2026">
             <figure className="teamProgramCrest">
               <Logo />
-              <span>02</span><i aria-hidden="true">↗</i>
+              <span>01</span><i aria-hidden="true">↗</i>
             </figure>
             <div>
               <small>2026 SEASON · THE NEXT CHAPTER</small>
               <h2>Team of 2026</h2>
               <p>Discover the current Royals preparing to compete with belief, discipline and one shared purpose.</p>
+              <strong>View team <span>→</span></strong>
+            </div>
+          </Link>
+          <Link className="teamProgramCard" href="/team/2025">
+            <figure>
+              <img src="/team-2025-hero-elegant.jpg" alt="The Entrepot Royals 2025 cricket squad in a pre-match huddle" />
+              <span>02</span><i aria-hidden="true">↗</i>
+            </figure>
+            <div>
+              <small>2025 SEASON · THE FIRST CHAPTER</small>
+              <h2>Team of 2025</h2>
+              <p>Meet the squad that carried the crest through our opening campaign and began the Entrepot Royals legacy.</p>
               <strong>View team <span>→</span></strong>
             </div>
           </Link>
