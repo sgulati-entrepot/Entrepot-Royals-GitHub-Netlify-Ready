@@ -1,5 +1,6 @@
 import Footer from "./components/Footer";
 import HeaderSocials from "./components/HeaderSocials";
+import TeamMenu from "./components/TeamMenu";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -22,7 +23,7 @@ export default function Home() {
         <div className="navLinks">
           <a href="#legacy">Our story</a>
           <a href="/owners">Team owners</a>
-          <a href="/team">Team members</a>
+          <TeamMenu />
           <a href="/fixtures">Fixtures & results</a>
           <a href="/gallery">Royal Moments</a>
           <a href="/supporters">Royal Supporters</a>

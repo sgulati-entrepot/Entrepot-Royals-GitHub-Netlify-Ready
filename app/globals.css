@@ -883,3 +883,69 @@ html,body { width:100%; overflow-x:hidden; }
 @media(max-width:1050px){.hero .officialCrest{padding:0!important}}
 @media(max-width:850px){.hero .officialCrest{padding:0!important}}
 @media(max-width:520px){.hero .officialCrest{padding:0!important}}
+
+/* Team season navigation */
+.teamMenu { position:relative; flex:0 0 auto; }
+.teamMenu summary {
+  display:flex; align-items:center; gap:7px; min-height:38px; cursor:pointer;
+  color:inherit; opacity:.74; list-style:none; transition:color .22s ease,opacity .22s ease;
+}
+.teamMenu summary::-webkit-details-marker { display:none; }
+.teamMenu summary>span { color:var(--bright-gold); font-size:13px; transition:transform .22s ease; }
+.teamMenu:hover summary,.teamMenu:focus-within summary,.teamMenu[open] summary,.teamMenu.active summary { color:var(--bright-gold); opacity:1; }
+.teamMenu[open] summary>span { transform:rotate(180deg); }
+.teamDropdown {
+  position:absolute; z-index:80; top:calc(100% + 14px); left:50%; width:205px; padding:10px;
+  display:none; transform:translateX(-50%); background:#020713;
+  border:1px solid rgba(201,154,46,.48); box-shadow:0 20px 45px rgba(0,0,0,.42);
+}
+.teamDropdown::before { content:""; position:absolute; left:0; right:0; top:-14px; height:14px; }
+.teamMenu:hover .teamDropdown,.teamMenu:focus-within .teamDropdown,.teamMenu[open] .teamDropdown { display:grid; }
+.navLinks .teamDropdown a {
+  min-height:42px; padding:0 13px; display:flex; align-items:center;
+  color:rgba(255,255,255,.78); opacity:1; border-bottom:1px solid rgba(255,255,255,.09);
+  font-size:9px; letter-spacing:.15em; white-space:nowrap;
+}
+.navLinks .teamDropdown a:last-child { border-bottom:0; }
+.navLinks .teamDropdown a:hover,.navLinks .teamDropdown a:focus-visible { color:#06132a; background:linear-gradient(115deg,#a97516,#f5df9a 45%,#d5a536); }
+
+.teamSeasonGrid {
+  display:grid; grid-template-columns:1fr 1fr; gap:1px; padding:1px;
+  background:#c99a2e; border-top:1px solid #c99a2e; border-bottom:1px solid #c99a2e;
+}
+.teamSeasonGrid>a {
+  min-height:430px; padding:70px 6.5vw; display:flex; flex-direction:column; justify-content:flex-end;
+  color:#fff; background:radial-gradient(circle at 80% 20%,#153f86,#071a39 42%,#020713 78%);
+  transition:filter .25s ease,transform .25s ease;
+}
+.teamSeasonGrid>a:nth-child(2) { background:radial-gradient(circle at 75% 25%,#1b55a3,#0a2b63 42%,#020713 82%); }
+.teamSeasonGrid>a:hover { filter:brightness(1.12); }
+.teamSeasonGrid small { color:#d7ae52; font-size:9px; font-weight:800; letter-spacing:.24em; }
+.teamSeasonGrid strong { margin:22px 0 32px; font:clamp(46px,5vw,76px)/.95 Georgia,serif; }
+.teamSeasonGrid strong em { color:#f5df9a; font-weight:400; }
+.teamSeasonGrid span { width:max-content; padding-bottom:8px; border-bottom:1px solid #c99a2e; font-size:9px; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.seasonSwitch {
+  padding:38px 6.5vw; display:flex; align-items:center; justify-content:center; gap:12px;
+  color:#fff; background:#020713; border-top:1px solid rgba(201,154,46,.3);
+}
+.seasonSwitch>span { margin-right:20px; color:rgba(255,255,255,.42); font-size:8px; font-weight:800; letter-spacing:.22em; }
+.seasonSwitch a { padding:13px 18px; border:1px solid rgba(201,154,46,.35); font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+.seasonSwitch a:hover,.seasonSwitch a.active { color:#06132a; background:linear-gradient(115deg,#a97516,#f5df9a 45%,#d5a536); border-color:#f5df9a; }
+
+@media(max-width:760px){
+  .nav .teamMenu { display:flex; align-items:center; }
+  .nav .teamMenu summary {
+    min-height:38px; padding:0 13px; border:1px solid rgba(245,223,154,.2);
+    font-size:9px; letter-spacing:.11em; white-space:nowrap;
+  }
+  .nav .teamMenu:hover .teamDropdown,.nav .teamMenu:focus-within .teamDropdown { display:none; }
+  .nav .teamMenu[open] .teamDropdown {
+    position:static; width:auto; margin-left:8px; padding:0; display:flex; transform:none;
+    background:transparent; border:0; box-shadow:none;
+  }
+  .navLinks .teamDropdown a { min-height:38px; border:1px solid rgba(245,223,154,.2); }
+  .teamSeasonGrid { grid-template-columns:1fr; }
+  .teamSeasonGrid>a { min-height:330px; padding:55px 24px; }
+  .seasonSwitch { padding:32px 20px; flex-wrap:wrap; }
+  .seasonSwitch>span { width:100%; margin:0 0 8px; text-align:center; }
+}
