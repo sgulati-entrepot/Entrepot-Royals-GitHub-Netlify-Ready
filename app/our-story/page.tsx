@@ -8,53 +8,127 @@ const Logo = ({ className = "" }: { className?: string }) => (
   <Image className={className} src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} />
 );
 
-const chapters = [
-  { number: "01", label: "THE BEGINNING", title: "A crest with purpose", copy: "Entrepot Royals began in 2025 with a simple ambition: build a cricket team where competition, character and connection carry equal weight." },
-  { number: "02", label: "THE FIRST CAMPAIGN", title: "Learning through the contest", copy: "Our debut RECL season tested our composure, strengthened our relationships and gave the Royal identity its first defining moments." },
-  { number: "03", label: "THE NEXT CHAPTER", title: "Rising with experience", copy: "The Royals return with sharper preparation, deeper belief and the same promise—to honour the game, the team and every person behind the boundary." },
+const royalCode = [
+  { number: "01", title: "Courage", copy: "We accept challenges with confidence and never step away from the contest. Whether defending a difficult total or chasing under pressure, a Royal keeps believing until the final ball." },
+  { number: "02", title: "Unity", copy: "We play for the name on the front of the jersey and stand beside the people wearing it. Individual talent is celebrated, but teamwork remains our greatest strength." },
+  { number: "03", title: "Discipline", copy: "Preparation creates confidence. Consistency builds performance. We respect practice, strategy, punctuality and the small details that can make a big difference on match day." },
+  { number: "04", title: "Pride", copy: "We respect cricket, our opponents, our teammates and the crest we represent. Winning matters—but the manner in which we compete matters just as much." },
 ];
 
 export default function OurStoryPage() {
   return (
     <main className="profilePage storyPage" id="main-content">
       <SiteHeader active="story" ctaHref="/team" ctaLabel="Meet the Royals" />
+
       <header className="editorialHero storyHero">
-        <div className="editorialHeroCopy"><p className="eyebrow"><span /> THE JOURNEY BEHIND THE CREST</p><h1>OUR<br /><em>STORY</em></h1><p>From a first season built on belief to a future shaped by purpose—this is how the Entrepot Royals continue to rise.</p></div>
+        <div className="editorialHeroCopy">
+          <p className="eyebrow"><span /> THE JOURNEY BEHIND THE CREST</p>
+          <h1>OUR<br /><em>STORY</em></h1>
+          <p>Born from passion. Built as a family. Ready to roar.</p>
+        </div>
         <LandingHeroMedia photo="/our-story-hero-elegant.jpg" alt="A heritage cricket pavilion with a worn bat, leather kit bag and scorebook at dawn" caption="BELIEF · CHARACTER · ONE ROYAL PURPOSE" className="storyHeroMedia" />
       </header>
-      <section className="statement" id="legacy">
-        <p className="sectionLabel">01 · OUR LEGACY</p>
-        <div className="statementGrid">
-          <h2>NOT JUST A TEAM.<br /><em>A ROYAL STANDARD.</em></h2>
-          <div>
-            <p className="lead">Entrepot Royals is a collective of competitors who play with courage, composure and complete commitment to the crest.</p>
-            <p>Every over is an opportunity. Every partnership is built on trust. Every time we step onto the field, we carry one ambition: to set a standard worthy of the name Royals.</p>
-          </div>
+
+      <section className="storyOverview" aria-labelledby="story-origin-title">
+        <div>
+          <p className="sectionLabel">01 · OUR ORIGIN</p>
+          <h2 id="story-origin-title">BORN FROM PASSION.<br /><em>BUILT AS A FAMILY.</em></h2>
         </div>
-        <div className="royalWord" aria-hidden="true">ROYAL</div>
-      </section>
-      <section className="storyChapters" aria-label="Entrepot Royals story chapters">
-        {chapters.map((chapter) => <article key={chapter.number}><span>{chapter.number}</span><small>{chapter.label}</small><h2>{chapter.title}</h2><p>{chapter.copy}</p></article>)}
-      </section>
-      <section className="recl" id="recl">
-        <div className="reclBadge">
-          <span className="reclCrown" aria-hidden="true">♛</span>
-          <span className="reclMonogram">RECL</span>
-          <small>RISE OF THE ROYALS</small>
-          <i aria-hidden="true">EST. 2025</i>
-        </div>
-        <div className="reclCopy">
-          <p className="sectionLabel">03 · OUR RECL JOURNEY</p>
-          <h2>THE DEBUT<br />WAS ONLY THE<br /><em>BEGINNING.</em></h2>
-          <p>Last season marked our first chapter in RECL—a campaign that tested our character, strengthened our bond and showed us what the next level demands. We return with experience in our game and fire in our hearts.</p>
-          <div className="seasonLine">
-            <div><strong>01</strong><span>DEBUT<br />SEASON</span></div>
-            <div><strong>01</strong><span>ROYAL<br />FAMILY</span></div>
-            <div><strong>∞</strong><span>AMBITION<br />WITHOUT LIMITS</span></div>
-          </div>
+        <div className="storyOverviewCopy">
+          <p>Every great team begins with an idea. Entrepot Royals began with something even more powerful—a shared love for cricket and a vision to create a team where people could compete seriously, celebrate wholeheartedly and build friendships that continued long after the final ball was bowled.</p>
+          <p>Established in 2025, Entrepot Royals was created to be much more than another cricket team. The dream was to bring together passionate players, spirited supporters and committed leaders under one distinguished crest. A team where talent would be encouraged, character would be respected and every player would feel proud to call themselves a Royal.</p>
+          <p>What began as an exciting sporting initiative soon grew into a close-knit cricketing family—one that trains together, competes together, celebrates together and, occasionally, debates dropped catches and questionable umpiring decisions together!</p>
+          <p>That is the spirit of Entrepot Royals: competitive on the field, connected beyond it and always ready to enjoy the game.</p>
         </div>
       </section>
-      <section className="storyPromise"><Logo className="storyPromiseLogo" /><div><p className="sectionLabel light">THE STORY CONTINUES</p><h2>ONE CREST.<br /><em>EVERY CHAPTER.</em></h2><p>The next Royal moment is waiting to be written.</p></div><Link className="goldButton" href="/team">Meet the team ↗</Link></section>
+
+      <section className="storyNarrative storyJourney" id="recl" aria-labelledby="royal-journey-title">
+        <div className="storyNarrativeHeading">
+          <span>02</span><p className="sectionLabel">THE FIRST CHAPTER</p>
+          <h2 id="royal-journey-title">THE BEGINNING OF<br /><em>THE ROYAL JOURNEY</em></h2>
+        </div>
+        <div className="storyNarrativeCopy">
+          <p>The Royal journey officially began in 2025 with our debut season in RECL. It was the first opportunity for our players to step onto the field wearing the Entrepot Royals crest and transform a shared vision into a living, breathing team.</p>
+          <p>Our debut campaign brought everything that makes cricket unforgettable—determined performances, valuable partnerships, tense overs, important breakthroughs, spirited comebacks and plenty of memorable moments. Some matches tested our patience, while others revealed the true strength and potential of the team.</p>
+          <p className="storyPullQuote">Every run taught us something. Every wicket lifted the dugout. Every challenge made us more united.</p>
+          <p>The first season was never just about the scoreboard. It was about discovering who we were as a team. It helped us understand our strengths, recognise areas for improvement and develop the composure required to compete at a higher level. Most importantly, it established the foundation of the Royal identity.</p>
+          <p><strong>The debut was not the destination. It was the opening chapter.</strong></p>
+        </div>
+      </section>
+
+      <section className="storyNarrative storyNarrativeDark" aria-labelledby="many-strengths-title">
+        <div className="storyNarrativeHeading">
+          <span>03</span><p className="sectionLabel light">ONE ROYAL FAMILY</p>
+          <h2 id="many-strengths-title">ONE TEAM.<br /><em>MANY STRENGTHS.</em></h2>
+        </div>
+        <div className="storyNarrativeCopy">
+          <p>Entrepot Royals brings together players with different personalities, abilities, experiences and styles of play. Some lead with the bat, some create magic with the ball, some change the game through their fielding—and some make sure the energy in the dugout never drops.</p>
+          <p className="storyPullQuote">Every Royal has a role.</p>
+          <p>We believe that a successful cricket team is not created by individual talent alone. It is built through trust, communication, preparation and the willingness to support one another. A brilliant individual performance may win a moment, but a united team creates a lasting legacy.</p>
+          <p>Whether celebrating a boundary, encouraging a bowler after a difficult over or supporting a teammate through a challenging innings, the Royals stand together. When one player succeeds, the entire team celebrates. When the team faces a setback, everyone shares the responsibility of returning stronger.</p>
+          <p><strong>Different strengths. Different stories. One Royal family.</strong></p>
+        </div>
+      </section>
+
+      <section className="storyNarrative" aria-labelledby="leadership-title">
+        <div className="storyNarrativeHeading">
+          <span>04</span><p className="sectionLabel">LEADERSHIP & PURPOSE</p>
+          <h2 id="leadership-title">LEADERSHIP<br /><em>BEHIND THE CREST</em></h2>
+        </div>
+        <div className="storyNarrativeCopy">
+          <p>Behind Entrepot Royals is a leadership vision centred on opportunity, togetherness and sporting excellence.</p>
+          <p>The owners and leadership team are committed to creating a positive environment where players can express their abilities, develop their confidence and experience the true joy of competitive cricket. Their purpose is not merely to manage a team, but to build a culture—one that values preparation, professionalism, fairness and friendship.</p>
+          <p>This leadership philosophy extends beyond match day. It is visible in the encouragement given to every player, the involvement of families and supporters, and the collective effort invested in making each Royal experience meaningful.</p>
+          <p>The crest represents everyone who contributes to the journey: the players who take the field, the families who support them, the organisers who work behind the scenes and the supporters whose energy gives the Royals their roar.</p>
+        </div>
+      </section>
+
+      <section className="storyCodeSection" aria-labelledby="royal-code-title">
+        <div className="storyCodeIntro">
+          <p className="sectionLabel light">05 · WHAT GUIDES US</p>
+          <h2 id="royal-code-title">THE<br /><em>ROYAL CODE</em></h2>
+          <p>At the heart of Entrepot Royals are four principles that guide how we prepare, compete and carry ourselves.</p>
+        </div>
+        <div className="storyCodeGrid">
+          {royalCode.map((principle) => (
+            <article key={principle.number}><span>{principle.number}</span><h3>{principle.title}</h3><p>{principle.copy}</p></article>
+          ))}
+        </div>
+        <p className="storyCodePromise">Together, these principles form the Royal Code: play bravely, prepare professionally, support one another and enjoy every moment of the journey.</p>
+      </section>
+
+      <section className="storyNarrative storyBeyond" aria-labelledby="boundary-title">
+        <div className="storyNarrativeHeading">
+          <span>06</span><p className="sectionLabel">OUR COMMUNITY</p>
+          <h2 id="boundary-title">BEYOND<br /><em>THE BOUNDARY</em></h2>
+        </div>
+        <div className="storyNarrativeCopy">
+          <p>For Entrepot Royals, cricket is also about community.</p>
+          <p>The team creates an environment where players, owners, families, friends and supporters can come together and share the excitement of the sport. The laughter before a match, the conversations after it, the photographs, the celebrations and even the nervous moments in the final over all become part of our collective story.</p>
+          <p className="storyPullQuote">These are our Royal Moments—the memories that cannot always be measured on a scorecard.</p>
+          <p>The team’s supporters are an essential part of this journey. Their encouragement brings energy to the players and turns every fixture into an occasion. They are not simply watching from outside the boundary; they are part of the Royal family.</p>
+        </div>
+      </section>
+
+      <section className="storyFinale" aria-labelledby="next-chapter-title">
+        <p className="sectionLabel light">07 · THE STORY CONTINUES</p>
+        <h2 id="next-chapter-title">THE NEXT<br /><em>ROYAL CHAPTER</em></h2>
+        <div className="storyFinaleCopy">
+          <p>As Entrepot Royals moves forward, we do so with greater experience, sharper preparation and stronger belief.</p>
+          <p>The lessons of our debut season have made us more determined. We understand that meaningful progress requires patience, consistency and the willingness to keep learning. Our ambition is to become a respected and competitive presence in RECL while continuing to build a team culture that people are genuinely proud to join.</p>
+          <p>There will be new matches, new players, new partnerships and new challenges. There will be thrilling victories, difficult days and unforgettable finishes. Through every chapter, however, our identity will remain unchanged.</p>
+        </div>
+        <div className="storyVows" aria-label="Entrepot Royals promises">
+          <span>We will compete with courage.</span><span>We will prepare with discipline.</span><span>We will stand together in unity.</span><span>And we will wear the crest with pride.</span>
+        </div>
+        <p className="storyFinalWords">Our story began in 2025—but the most exciting chapters are still waiting to be written.</p>
+      </section>
+
+      <section className="storyPromise">
+        <Logo className="storyPromiseLogo" />
+        <div><p className="sectionLabel light">ONE CREST · ONE FAMILY · ONE AMBITION</p><h2>RISE WITH PRIDE.<br /><em>PLAY WITH PURPOSE.</em></h2><p>Entrepot Royals</p></div>
+        <Link className="goldButton" href="/team">Meet the team ↗</Link>
+      </section>
       <Footer />
     </main>
   );
