@@ -1,6 +1,6 @@
 import TeamSeasonPage, { type TeamPlayer } from "../../components/TeamSeasonPage";
 
-const roles = ["Captain", "Vice-Captain", "Wicketkeeper", "Top-order Batter", "Middle-order Batter", "All-Rounder", "Spin Bowler", "Fast Bowler"];
+const roles = ["Captain", "Co-Captain", "Wicketkeeper", "Top-order Batter", "Middle-order Batter", "All-Rounder", "Spin Bowler", "Fast Bowler"];
 const players: TeamPlayer[] = roles.map((role, index) => ({
   number: String(index + 1).padStart(2, "0"),
   name: index === 0 ? "Sajeev Gulati" : index === 1 ? "Divyesh Kharade" : "Player profile",
