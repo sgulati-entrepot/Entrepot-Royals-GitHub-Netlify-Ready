@@ -14,14 +14,16 @@ export default function PlayerPricingPage() {
     <main className="pricingPage" id="main-content">
       <SiteHeader active="team" ctaHref="/team/2026" ctaLabel="Team of 2026" />
       <header className="pricingHero">
-        <div>
+        <Image className="pricingHeroPhoto" src="/pricing-hero-stadium.jpg" alt="Elegant cricket auction desk overlooking a floodlit stadium" fill sizes="100vw" priority />
+        <div className="pricingHeroShade" />
+        <div className="pricingHeroCopy">
           <p className="eyebrow"><span /> ROYAL AUCTION DESK</p>
           <h1>PLAYER<br /><em>PRICING</em></h1>
           <p>Eight players. Twenty million points. Build the squad with clarity, control and complete budget visibility.</p>
         </div>
-        <div className="pricingHeroCrest">
-          <Image src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={600} height={600} priority />
-          <span>20,000,000</span><small>TOTAL POINTS</small>
+        <div className="pricingHeroSeal">
+          <Image src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={96} height={96} priority />
+          <div><small>ROYAL ALLOCATION</small><span>20,000,000</span><b>TOTAL POINTS · 08 PLAYERS</b></div>
         </div>
       </header>
       <PricingDashboard />

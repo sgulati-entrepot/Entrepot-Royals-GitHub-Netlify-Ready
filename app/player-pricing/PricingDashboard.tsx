@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 const TOTAL_ALLOCATION = 20_000_000;
@@ -116,6 +117,11 @@ export default function PricingDashboard() {
         <p>Enter each player and purchase points. Every saved amount is deducted from the fixed allocation automatically.</p>
       </div>
 
+      <figure className="pricingEditorialPhoto">
+        <Image src="/pricing-eight-player-table.jpg" alt="Eight navy player cards arranged on an elegant cricket selection table" fill sizes="(max-width: 900px) 100vw, 88vw" />
+        <figcaption><small>THE ROYAL EIGHT</small><strong>Every selection shapes the season.</strong><span>One allocation. Eight decisive calls.</span></figcaption>
+      </figure>
+
       <div className="pricingSummary" aria-live="polite">
         <article><small>TOTAL ALLOTTED</small><strong>{formatPoints(TOTAL_ALLOCATION)}</strong><span>POINTS</span></article>
         <article><small>TOTAL SPENT</small><strong>{formatPoints(totalSpent)}</strong><span>POINTS</span></article>
@@ -169,11 +175,11 @@ export default function PricingDashboard() {
         </label>
         <div className="pricingActionButtons">
           <button type="button" className="pricingSecondaryButton" onClick={resetChanges} disabled={!hasChanges || saving}>Discard changes</button>
-          <button type="button" className="pricingSaveButton" onClick={savePricing} disabled={!hasChanges || isOverBudget || saving || loading}>{saving ? "Saving…" : "Save all prices"}<span aria-hidden="true">→</span></button>
+          <button type="button" className="pricingSaveButton" onClick={savePricing} disabled={!hasChanges || isOverBudget || saving || loading}>{saving ? "Saving…" : "Save all points"}<span aria-hidden="true">→</span></button>
         </div>
       </div>
 
-      {isOverBudget && <p className="pricingMessage error" role="alert">Reduce the player prices by {formatPoints(Math.abs(remaining))} points before saving.</p>}
+      {isOverBudget && <p className="pricingMessage error" role="alert">Reduce the player purchase points by {formatPoints(Math.abs(remaining))} before saving.</p>}
       {message && <p className={`pricingMessage ${message.tone}`} role={message.tone === "error" ? "alert" : "status"}>{message.text}</p>}
       <p className="pricingSavedAt">{updatedAt ? `Last saved ${new Date(updatedAt).toLocaleString("en-IN")}` : "No saved pricing yet"}</p>
     </section>

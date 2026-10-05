@@ -65,7 +65,7 @@ const validatePlayers = (value: unknown): { players?: PlayerPrice[]; error?: str
     }
     if (name.length > 80) return { error: `Player ${id}'s name must be 80 characters or fewer.` };
     if (typeof price !== "number" || !Number.isSafeInteger(price) || price < 0 || price > TOTAL_ALLOCATION) {
-      return { error: `Player ${id}'s price must be a whole number between 0 and ${TOTAL_ALLOCATION}.` };
+      return { error: `Player ${id}'s purchase points must be a whole number between 0 and ${TOTAL_ALLOCATION}.` };
     }
 
     ids.add(id);
@@ -75,7 +75,7 @@ const validatePlayers = (value: unknown): { players?: PlayerPrice[]; error?: str
   players.sort((a, b) => a.id - b.id);
   const totalSpent = players.reduce((sum, player) => sum + player.price, 0);
   if (totalSpent > TOTAL_ALLOCATION) {
-    return { error: `The total price cannot exceed the ${TOTAL_ALLOCATION}-point allocation.` };
+    return { error: `The total purchase points cannot exceed the ${TOTAL_ALLOCATION}-point allocation.` };
   }
 
   return { players };
