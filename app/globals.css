@@ -1721,3 +1721,74 @@ a:focus-visible,button:focus-visible{outline:3px solid #f5df9a;outline-offset:3p
   .storyVows{grid-template-columns:1fr}
   .storyFinale{padding:80px 20px}
 }
+
+/* Player pricing and auction management */
+.pricingPage{min-height:100vh;color:var(--ink);background:#f4efe4}
+.pricingHero{
+  min-height:680px;padding:120px 7vw 80px;display:grid;grid-template-columns:1fr minmax(320px,470px);gap:7vw;
+  align-items:center;color:#fff;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 76% 44%,#17498f 0%,#0a2b63 24%,transparent 43%),linear-gradient(120deg,#010611,#061738 60%,#0a2b63);
+}
+.pricingHero::before{content:"20M";position:absolute;right:-2vw;bottom:-85px;color:rgba(255,255,255,.035);font:700 260px/.8 Georgia,serif}
+.pricingHero>div{position:relative;z-index:1}
+.pricingHero h1{margin:28px 0;font-size:clamp(72px,8vw,124px)}
+.pricingHero>div:first-child>p:last-child{max-width:650px;color:rgba(255,255,255,.68);font:18px/1.75 Georgia,serif}
+.pricingHeroCrest{padding:46px 38px;text-align:center;border:1px solid rgba(245,223,154,.38);background:rgba(1,6,17,.45);box-shadow:0 35px 80px rgba(0,0,0,.35)}
+.pricingHeroCrest img{width:min(270px,80%);height:auto;display:block;margin:0 auto 30px;border:1px solid rgba(245,223,154,.5)}
+.pricingHeroCrest span{display:block;color:#f5df9a;font:clamp(38px,4vw,58px) Georgia,serif}
+.pricingHeroCrest small{display:block;margin-top:9px;color:rgba(255,255,255,.58);font-size:9px;font-weight:800;letter-spacing:.25em}
+.pricingWorkspace{padding:115px 6.5vw 125px}
+.pricingHeading{display:grid;grid-template-columns:1fr 430px;gap:70px;align-items:end;margin-bottom:60px}
+.pricingHeading h2{margin:32px 0 0;font-size:clamp(52px,6vw,88px)}
+.pricingHeading>p{margin:0;color:#687181;font:16px/1.8 Georgia,serif}
+.pricingSummary{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #c9b98e;border-left:1px solid #c9b98e;background:#fff}
+.pricingSummary article{min-height:170px;padding:30px;display:flex;flex-direction:column;border-right:1px solid #c9b98e;border-bottom:1px solid #c9b98e}
+.pricingSummary small{color:#8f6818;font-size:8px;font-weight:800;letter-spacing:.2em}
+.pricingSummary strong{margin:auto 0 5px;font:clamp(32px,3.4vw,54px) Georgia,serif}
+.pricingSummary span{color:#7a8493;font-size:8px;letter-spacing:.18em}
+.pricingSummary .budgetRemaining{color:#fff;background:linear-gradient(145deg,#123f84,#061738)}
+.pricingSummary .budgetRemaining small,.pricingSummary .budgetRemaining span{color:#f5df9a}
+.pricingSummary .budgetDanger{color:#fff;background:#7e1e20}
+.pricingSummary .budgetDanger small,.pricingSummary .budgetDanger span{color:#ffd7d7}
+.pricingTableWrap{margin-top:42px;border:1px solid #cfc4aa;background:#fff;box-shadow:0 24px 55px rgba(2,7,19,.08)}
+.pricingTableHeader,.pricingRow{display:grid;grid-template-columns:80px minmax(220px,1fr) minmax(220px,.72fr) 150px;gap:24px;align-items:center}
+.pricingTableHeader{min-height:54px;padding:0 26px;color:#f5df9a;background:#061738;font-size:8px;font-weight:800;letter-spacing:.18em}
+.pricingRow{min-height:104px;padding:18px 26px;border-bottom:1px solid #ddd3bf}
+.pricingRow:last-child{border-bottom:0}
+.pricingNumber{color:#a77a20;font:26px Georgia,serif}
+.pricingRow label>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pricingRow input,.adminPinField input{width:100%;min-height:52px;padding:0 15px;color:#07162e;background:#f8f4ea;border:1px solid #cfc4aa;border-radius:0;font:16px Arial,sans-serif;outline:0}
+.pricingRow input:focus,.adminPinField input:focus{border-color:#a97516;box-shadow:0 0 0 3px rgba(201,154,46,.18)}
+.pricingRow input::placeholder{color:#9da3aa}
+.priceEntered,.pricePending{font-size:8px;font-weight:800;letter-spacing:.12em}
+.priceEntered{color:#277044}.pricePending{color:#9a701c}
+.pricingActions{margin-top:34px;padding:28px;display:flex;align-items:end;justify-content:space-between;gap:30px;background:#e9dfca;border:1px solid #cfc4aa}
+.adminPinField{width:min(320px,100%)}
+.adminPinField>span{display:block;margin-bottom:9px;color:#745820;font-size:8px;font-weight:800;letter-spacing:.16em}
+.adminPinField small{font-size:7px;color:#7f827f}
+.pricingActionButtons{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.pricingSaveButton,.pricingSecondaryButton{min-height:52px;padding:0 22px;border:1px solid #061738;cursor:pointer;text-transform:uppercase;font-size:9px;font-weight:800;letter-spacing:.13em}
+.pricingSaveButton{display:inline-flex;align-items:center;gap:24px;color:#06132a;border-color:#c99a2e;background:linear-gradient(135deg,#f5df9a,#c99a2e)}
+.pricingSecondaryButton{color:#061738;background:transparent}
+.pricingSaveButton:disabled,.pricingSecondaryButton:disabled{cursor:not-allowed;opacity:.45}
+.pricingMessage{margin:18px 0 0;padding:16px 18px;font-size:13px;font-weight:700}
+.pricingMessage.success{color:#15562f;background:#dcefe2;border:1px solid #9bc7a8}
+.pricingMessage.error{color:#7e1e20;background:#f4dddd;border:1px solid #d7a5a5}
+.pricingSavedAt{margin:16px 0 0;color:#7a8493;font-size:9px;letter-spacing:.12em;text-transform:uppercase;text-align:right}
+.pricingLoading{margin-top:42px;padding:70px;text-align:center;color:#687181;background:#fff;border:1px solid #cfc4aa}
+@media(max-width:900px){
+  .pricingHero{grid-template-columns:1fr;gap:45px;text-align:center;padding:145px 24px 80px}
+  .pricingHero .eyebrow{justify-content:center}.pricingHero>div:first-child>p:last-child{margin-left:auto;margin-right:auto}
+  .pricingHeroCrest{width:min(460px,100%);justify-self:center}.pricingHeroCrest img{width:210px}
+  .pricingHeading{grid-template-columns:1fr;gap:28px}.pricingSummary{grid-template-columns:1fr 1fr}.pricingSummary article:last-child{grid-column:1/-1}
+  .pricingTableHeader{display:none}.pricingRow{grid-template-columns:58px 1fr 1fr;gap:14px}.pricingRow>span:last-child{grid-column:2/-1}
+}
+@media(max-width:600px){
+  .pricingHero{min-height:0;padding:125px 20px 70px}.pricingHero h1{font-size:clamp(52px,16vw,72px)}
+  .pricingHeroCrest{padding:30px 22px}.pricingHeroCrest img{width:170px}
+  .pricingWorkspace{padding:78px 20px 88px}.pricingHeading h2{font-size:clamp(44px,13vw,58px)}
+  .pricingSummary{grid-template-columns:1fr}.pricingSummary article:last-child{grid-column:auto}.pricingSummary article{min-height:145px}
+  .pricingRow{grid-template-columns:1fr;padding:22px 18px}.pricingRow>span:last-child{grid-column:auto}.pricingNumber{font-size:21px}
+  .pricingActions{align-items:stretch;flex-direction:column}.adminPinField{width:100%}.pricingActionButtons{justify-content:stretch}.pricingSaveButton,.pricingSecondaryButton{flex:1;justify-content:center}
+  .pricingSavedAt{text-align:left}
+}

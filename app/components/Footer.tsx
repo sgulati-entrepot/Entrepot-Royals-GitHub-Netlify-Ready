@@ -20,6 +20,7 @@ export default function Footer() {
         <a href="/insights">Insights</a>
         <a href="/insights/testimonials">Testimonials</a>
         <a href="/insights/blogs">Blogs</a>
+        <a href="/player-pricing">Player Pricing</a>
         <a href="/contact">Contact Us</a>
       </nav>
       <div className="footerContact">

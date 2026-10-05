@@ -21,6 +21,7 @@ export default function TeamMenu({ active = false, onNavigate }: { active?: bool
       <div className="teamDropdown">
         <Link href="/team/2026" onClick={onNavigate}>Team of 2026</Link>
         <Link href="/team/2025" onClick={onNavigate}>Team of 2025</Link>
+        <Link href="/player-pricing" onClick={onNavigate}>Player Pricing</Link>
       </div>
     </div>
   );
