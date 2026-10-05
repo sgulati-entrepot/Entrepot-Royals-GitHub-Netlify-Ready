@@ -113,7 +113,7 @@ export default function PricingDashboard() {
           <p className="sectionLabel">LIVE AUCTION CONTROL</p>
           <h2 id="pricing-heading">BUILD THE<br /><em>ROYAL EIGHT.</em></h2>
         </div>
-        <p>Enter each player and purchase price. Every saved amount is deducted from the fixed allocation automatically.</p>
+        <p>Enter each player and purchase points. Every saved amount is deducted from the fixed allocation automatically.</p>
       </div>
 
       <div className="pricingSummary" aria-live="polite">
@@ -126,7 +126,7 @@ export default function PricingDashboard() {
         <div className="pricingLoading" role="status">Loading saved player pricing…</div>
       ) : (
         <div className="pricingTableWrap">
-          <div className="pricingTableHeader" aria-hidden="true"><span>NO.</span><span>PLAYER NAME</span><span>PURCHASE PRICE</span><span>STATUS</span></div>
+          <div className="pricingTableHeader" aria-hidden="true"><span>NO.</span><span>PLAYER NAME</span><span>PURCHASE POINTS</span><span>STATUS</span></div>
           <div className="pricingRows">
             {players.map((player) => (
               <article className="pricingRow" key={player.id}>
@@ -142,7 +142,7 @@ export default function PricingDashboard() {
                   />
                 </label>
                 <label>
-                  <span>Purchase price in points</span>
+                  <span>Purchase points</span>
                   <input
                     type="text"
                     inputMode="numeric"
@@ -155,7 +155,7 @@ export default function PricingDashboard() {
                     aria-invalid={player.price > TOTAL_ALLOCATION}
                   />
                 </label>
-                <span className={player.price > 0 ? "priceEntered" : "pricePending"}>{player.price > 0 ? "PRICE ENTERED" : "AWAITING PRICE"}</span>
+                <span className={player.price > 0 ? "priceEntered" : "pricePending"}>{player.price > 0 ? "POINTS ENTERED" : "AWAITING POINTS"}</span>
               </article>
             ))}
           </div>
