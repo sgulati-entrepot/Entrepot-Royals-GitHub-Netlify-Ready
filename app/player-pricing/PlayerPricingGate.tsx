@@ -34,8 +34,7 @@ export default function PlayerPricingGate() {
   }, []);
 
   useEffect(() => {
-    const lockHiddenPage = () => {
-      if (document.visibilityState !== "hidden") return;
+    const lockPrivatePage = () => {
       setPin("");
       setError("");
       setAuthState("locked");
@@ -46,22 +45,17 @@ export default function PlayerPricingGate() {
       }).catch(() => undefined);
     };
 
-    const lockDepartingPage = () => {
-      setPin("");
-      setError("");
-      setAuthState("locked");
-      void fetch("/api/player-pricing-auth", {
-        method: "DELETE",
-        credentials: "same-origin",
-        keepalive: true,
-      }).catch(() => undefined);
+    const lockHiddenPage = () => {
+      if (document.visibilityState === "hidden") lockPrivatePage();
     };
 
     document.addEventListener("visibilitychange", lockHiddenPage);
-    window.addEventListener("pagehide", lockDepartingPage);
+    window.addEventListener("blur", lockPrivatePage);
+    window.addEventListener("pagehide", lockPrivatePage);
     return () => {
       document.removeEventListener("visibilitychange", lockHiddenPage);
-      window.removeEventListener("pagehide", lockDepartingPage);
+      window.removeEventListener("blur", lockPrivatePage);
+      window.removeEventListener("pagehide", lockPrivatePage);
     };
   }, []);
 
