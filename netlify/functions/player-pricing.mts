@@ -1,5 +1,6 @@
 import { getStore } from "@netlify/blobs";
 import type { Config } from "@netlify/functions";
+import { isPricingAuthorized } from "./lib/pricing-auth";
 
 const TOTAL_ALLOCATION = 20_000_000;
 const PLAYER_COUNT = 8;
@@ -86,6 +87,10 @@ const handler = async (request: Request) => {
     return json({ error: "Method not allowed." }, 405);
   }
 
+  if (!isPricingAuthorized(request)) {
+    return json({ error: "Enter the page PIN to access player pricing." }, 401);
+  }
+
   try {
     const store = getStore({ name: "entrepot-player-pricing", consistency: "strong" });
     const existing = await store.getWithMetadata(STORE_KEY, { type: "json" });
@@ -93,11 +98,6 @@ const handler = async (request: Request) => {
     const version = existing?.etag ?? null;
 
     if (request.method === "GET") return json({ ...record, version });
-
-    const configuredPin = process.env.PRICING_ADMIN_PIN?.trim();
-    if (configuredPin && request.headers.get("x-pricing-admin-pin") !== configuredPin) {
-      return json({ error: "The admin PIN is incorrect." }, 401);
-    }
 
     const contentLength = Number(request.headers.get("content-length") ?? 0);
     if (contentLength > 25_000) return json({ error: "Request is too large." }, 413);

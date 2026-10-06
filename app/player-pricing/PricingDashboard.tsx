@@ -34,7 +34,6 @@ export default function PricingDashboard() {
   const [savedPlayers, setSavedPlayers] = useState<PlayerPrice[]>(initialPlayers);
   const [version, setVersion] = useState<string | null>(null);
   const [updatedAt, setUpdatedAt] = useState<string | null>(null);
-  const [adminPin, setAdminPin] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ tone: "success" | "error"; text: string } | null>(null);
@@ -49,7 +48,7 @@ export default function PricingDashboard() {
 
     const loadInitialPricing = async () => {
       try {
-        const response = await fetch("/api/player-pricing", { cache: "no-store" });
+        const response = await fetch("/api/player-pricing", { cache: "no-store", credentials: "same-origin" });
         const data = (await response.json()) as PricingResponse;
         if (!response.ok) throw new Error(data.error || "Could not load player pricing.");
         if (cancelled) return;
@@ -84,8 +83,8 @@ export default function PricingDashboard() {
         method: "PUT",
         headers: {
           "content-type": "application/json",
-          ...(adminPin ? { "x-pricing-admin-pin": adminPin } : {}),
         },
+        credentials: "same-origin",
         body: JSON.stringify({ players, version }),
       });
       const data = (await response.json()) as PricingResponse;
@@ -169,10 +168,6 @@ export default function PricingDashboard() {
       )}
 
       <div className="pricingActions">
-        <label className="adminPinField">
-          <span>ADMIN PIN <small>(ONLY IF ENABLED)</small></span>
-          <input type="password" value={adminPin} onChange={(event) => setAdminPin(event.target.value)} autoComplete="current-password" />
-        </label>
         <div className="pricingActionButtons">
           <button type="button" className="pricingSecondaryButton" onClick={resetChanges} disabled={!hasChanges || saving}>Discard changes</button>
           <button type="button" className="pricingSaveButton" onClick={savePricing} disabled={!hasChanges || isOverBudget || saving || loading}>{saving ? "Saving…" : "Save all points"}<span aria-hidden="true">→</span></button>
