@@ -19,20 +19,49 @@ export default function PlayerPricingGate() {
 
   useEffect(() => {
     let cancelled = false;
-    const checkSession = async () => {
-      try {
-        const response = await fetch("/api/player-pricing-auth", {
-          cache: "no-store",
-          credentials: "same-origin",
-        });
-        if (!cancelled) setAuthState(response.ok ? "authorized" : "locked");
-      } catch {
-        if (!cancelled) setAuthState("locked");
-      }
+    const beginLockedVisit = async () => {
+      await fetch("/api/player-pricing-auth", {
+        method: "DELETE",
+        credentials: "same-origin",
+        cache: "no-store",
+      }).catch(() => undefined);
+      if (!cancelled) setAuthState("locked");
     };
-    void checkSession();
+    void beginLockedVisit();
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const lockHiddenPage = () => {
+      if (document.visibilityState !== "hidden") return;
+      setPin("");
+      setError("");
+      setAuthState("locked");
+      void fetch("/api/player-pricing-auth", {
+        method: "DELETE",
+        credentials: "same-origin",
+        keepalive: true,
+      }).catch(() => undefined);
+    };
+
+    const lockDepartingPage = () => {
+      setPin("");
+      setError("");
+      setAuthState("locked");
+      void fetch("/api/player-pricing-auth", {
+        method: "DELETE",
+        credentials: "same-origin",
+        keepalive: true,
+      }).catch(() => undefined);
+    };
+
+    document.addEventListener("visibilitychange", lockHiddenPage);
+    window.addEventListener("pagehide", lockDepartingPage);
+    return () => {
+      document.removeEventListener("visibilitychange", lockHiddenPage);
+      window.removeEventListener("pagehide", lockDepartingPage);
     };
   }, []);
 
