@@ -2,7 +2,9 @@
   "name": "entrepot-royals",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": ">=22.12" },
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +13,7 @@
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.3",
+    "@netlify/database": "^2.0.1",
     "@netlify/functions": "^6.0.2",
     "next": "16.2.6",
     "react": "19.2.6",

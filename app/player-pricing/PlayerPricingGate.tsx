@@ -5,13 +5,14 @@ import { FormEvent, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import SiteHeader from "../components/SiteHeader";
 import PricingDashboard from "./PricingDashboard";
+import AuctionTracker from "../team/auction/AuctionTracker";
 
 type AuthResponse = {
   authorized?: boolean;
   error?: string;
 };
 
-export default function PlayerPricingGate() {
+export default function PlayerPricingGate({ auction = false }: { auction?: boolean }) {
   const [authState, setAuthState] = useState<"checking" | "locked" | "authorized">("checking");
   const [pin, setPin] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -100,7 +101,7 @@ export default function PlayerPricingGate() {
         <section className="pricingLockCard" aria-busy={authState === "checking"}>
           <Image src="/entrepot-royals-logo.png" alt="Entrepot Royals official crest" width={116} height={116} priority />
           <p className="eyebrow"><span /> PRIVATE ROYAL ACCESS</p>
-          <h1>PLAYER<br /><em>PRICING</em></h1>
+          <h1>{auction ? "RECL5" : "PLAYER"}<br /><em>{auction ? "AUCTION" : "PRICING"}</em></h1>
           {authState === "checking" ? (
             <p className="pricingLockStatus" role="status">Checking secure access…</p>
           ) : (
@@ -136,6 +137,8 @@ export default function PlayerPricingGate() {
       </main>
     );
   }
+
+  if (auction) return <AuctionTracker onLock={lockPage} />;
 
   return (
     <main className="pricingPage" id="main-content">
