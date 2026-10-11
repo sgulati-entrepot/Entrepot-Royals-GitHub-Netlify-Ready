@@ -10,6 +10,7 @@ import PlayerPool from "./PlayerPool";
 import { auctionTeamNames } from "../../../lib/auction-teams";
 import NameDropdown from "./NameDropdown";
 import SquadEditor from "./SquadEditor";
+import ColumnFilters, { matchesSelections, SelectionFilters } from "./ColumnFilters";
 
 type Snapshot = { document: AuctionDocument; version: string | null; updatedAt: string | null; error?: string };
 // Keep an interrupted edit in memory while the PIN gate relocks (never localStorage).
@@ -54,6 +55,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   const [editingTeam, setEditingTeam] = useState<number | null>(null);
   const [sort, setSort] = useState({ key: "maxBid", direction: -1 });
   const [dashboardSort, setDashboardSort] = useState({ key: "maxBid", direction: -1 });
+  const [selections, setSelections] = useState<SelectionFilters>({});
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [filter, setFilter] = useState<Filter>({ key: "left", operator: "gte", value: "" });
@@ -143,8 +145,10 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   ] : [{ key: "name", label: "Team" }, metrics[2], metrics[3], metrics[0], metrics[1], metrics[4], metrics[5], { key: "used", label: "Budget used", numeric: true }], [view, doc.settings.playersPerTeam]);
   const activeSort = view === "entry" ? sort : dashboardSort;
   const displayColumns = view === "entry" && !fullSheet ? columns.filter(c => !c.key.endsWith("-bid")) : columns;
+  const filterFields = columns.map(c => ({ key: c.key, label: c.label, values: doc.teams.map(t => String(cellValue(t, doc.settings, c.key) ?? "")) }));
   const rows = useMemo(() => doc.teams.filter(team => {
     const m = teamMetrics(team, doc.settings);
+    if (!matchesSelections(selections, key => [String(cellValue(team, doc.settings, key) ?? "")])) return false;
     if (search && ![team.name, ...team.players.map(p => p.name)].some(name => name.toLowerCase().includes(search.toLowerCase()))) return false;
     if (statusFilter && m.status !== statusFilter) return false;
     if (filter.value !== "") {
@@ -161,7 +165,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
     if (av === null) return bv === null ? a.id - b.id : 1;
     if (bv === null) return -1;
     return (typeof av === "number" && typeof bv === "number" ? av - bv : String(av).localeCompare(String(bv), undefined, { numeric: true })) * activeSort.direction || a.id - b.id;
-  }), [doc, search, statusFilter, filter, activeSort, heldOrder]);
+  }), [doc, search, statusFilter, filter, activeSort, heldOrder, selections]);
   const totals = leagueMetrics(doc);
   const alerts = doc.teams.filter(team => !["READY", "COMPLETE"].includes(teamMetrics(team, doc.settings).status));
 
@@ -192,7 +196,8 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
       <div className="auctionViewBar"><div role="tablist" aria-label="Workbook sheets">{([["entry","01","Auction Entry"],["dashboard","02","Live Dashboard"],["players","03","Player List"],["availability","04","Player Dashboard"]] as const).map(([key,number,label]) => <button key={key} role="tab" aria-selected={view === key} onClick={() => { setView(key); setFilter({ key: "left", operator: "gte", value: "" }); }}><small>{number}</small>{label}</button>)}</div><span className="auctionAutoBadge">{saving ? "Saving…" : dirty ? "Unsaved edits" : "Autosave on"}</span></div>
       {(view === "players" || view === "availability") && <PlayerPool doc={doc} dashboard={view === "availability"} disabled={!saved || saving} onChange={registry => edit({ ...doc, registry })} />}
       {(view === "entry" || view === "dashboard") && <>
-      <div className="auctionFilters"><label>Search teams or players<input type="search" value={search} onChange={e => setSearch(e.target.value)} placeholder="Find a team or player…" /></label><label>Status<select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}><option value="">All statuses</option>{statuses.map(status => <option key={status}>{status}</option>)}</select></label><label>Filter column<select value={filter.key} onChange={e => setFilter({ ...filter, key: e.target.value })}>{columns.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}</select></label><label>Condition<select value={filter.operator} onChange={e => setFilter({ ...filter, operator: e.target.value })}><option value="gte">At least</option><option value="lte">At most</option><option value="eq">Equals</option><option value="contains">Contains</option></select></label><label>Filter value<input value={filter.value} onChange={e => setFilter({ ...filter, value: e.target.value })} placeholder="Any value" /></label><button className="auctionGhost" onClick={() => { setSearch(""); setStatusFilter(""); setFilter({ key: "left", operator: "gte", value: "" }); }}>Clear filters</button></div>
+      <div className="auctionFilters"><label>Search teams or players<input type="search" value={search} onChange={e => setSearch(e.target.value)} placeholder="Find a team or player…" /></label><label>Status<select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}><option value="">All statuses</option>{statuses.map(status => <option key={status}>{status}</option>)}</select></label><label>Filter column<select value={filter.key} onChange={e => setFilter({ ...filter, key: e.target.value })}>{columns.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}</select></label><label>Condition<select value={filter.operator} onChange={e => setFilter({ ...filter, operator: e.target.value })}><option value="gte">At least</option><option value="lte">At most</option><option value="eq">Equals</option><option value="contains">Contains</option></select></label><label>Filter value<input value={filter.value} onChange={e => setFilter({ ...filter, value: e.target.value })} placeholder="Any value" /></label><button className="auctionGhost" onClick={() => { setSearch(""); setStatusFilter(""); setSelections({}); setFilter({ key: "left", operator: "gte", value: "" }); }}>Clear filters</button></div>
+      <ColumnFilters fields={filterFields} value={selections} onChange={setSelections} />
       <div className="auctionTableMeta"><span>{rows.length} of {doc.teams.length} teams · One row per team · Player name above price · Prices in ₹ lakh · Scroll sideways for more columns</span><div className="auctionTableActions">{view === "entry" && !fullSheet && <button aria-pressed={comfortable} onClick={() => setComfortable(!comfortable)}>{comfortable ? "Switch to compact" : "Switch to readable"}</button>}<button onClick={() => setWideView(!wideView)}>{wideView ? "Exit expanded view" : "Expand table"}</button>{view === "entry" && <button onClick={() => setFullSheet(!fullSheet)}>{fullSheet ? "Compact comparison" : "Full spreadsheet"}</button>}<button onClick={exportCsv} disabled={!saved}>Export CSV ↓</button></div></div>
       {loading ? <div className="auctionLoad" role="status">Loading the saved auction…</div> : !saved ? <div className="auctionLoad"><p role="alert">{error}</p><button className="auctionGold" onClick={() => void load()}>Retry loading</button></div> : <div className="auctionTableScroll" tabIndex={0} aria-label={`${view === "entry" ? "Auction entry" : "Live dashboard"} table, horizontally scrollable`}>
         <table className={view === "entry" && fullSheet ? "auctionTable entry" : view === "entry" ? `auctionTable compactComparison${comfortable ? " comfortableComparison" : ""}` : "auctionTable dashboard"} onFocusCapture={() => { if (!heldOrder) setHeldOrder(rows.map(t => t.id)); }} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHeldOrder(null); }}><thead><tr>{displayColumns.map(c => <th key={c.key} scope="col" className={c.numeric ? "numeric" : ""} aria-sort={activeSort.key === c.key ? activeSort.direction === 1 ? "ascending" : "descending" : "none"}><button onClick={() => { const next = { key: c.key, direction: activeSort.key === c.key ? activeSort.direction * -1 : c.numeric ? -1 : 1 }; if (view === "entry") setSort(next); else setDashboardSort(next); }}>{c.label}<span aria-hidden="true">{activeSort.key === c.key ? activeSort.direction === 1 ? " ↑" : " ↓" : " ↕"}</span></button></th>)}</tr></thead>
