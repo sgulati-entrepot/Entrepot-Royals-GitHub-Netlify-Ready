@@ -20,7 +20,7 @@ export default function NameDropdown({ label, value, options, disabled, onChange
   };
   return <div className="auctionNameDropdown">
     <input role="combobox" aria-label={label} aria-expanded={open} aria-controls={id} aria-autocomplete="list" aria-activedescendant={open && active >= 0 && matches[active] ? `${id}-${active}` : undefined}
-      autoComplete="off" maxLength={80} placeholder="Type to search…" value={query} disabled={disabled}
+      autoComplete="off" maxLength={80} placeholder="Type to search…" title={value || label} value={query} disabled={disabled}
       onFocus={e => { setOpen(true); setSearching(false); setActive(-1); e.target.select(); }}
       onChange={e => { setQuery(e.target.value); setSearching(true); setOpen(true); setActive(-1); }}
       onBlur={() => commit(query)}

@@ -19,6 +19,23 @@
 
 /* Refined royal workspace */
 .auctionWorkspace{max-width:1720px}
+.auctionTable.compactComparison{min-width:1320px;table-layout:fixed}
+.auctionTable.compactComparison th,.auctionTable.compactComparison td{padding:5px 4px;font-size:11px}
+.auctionTable.compactComparison th:first-child{width:140px;min-width:140px}
+.auctionTable.compactComparison th:first-child input{width:100%;font-weight:600;font-size:11px}
+.auctionTable.compactComparison thead th{height:44px}
+.auctionTable.compactComparison thead button{font-size:8px;letter-spacing:0}
+.auctionTable.compactComparison input{width:100%;min-width:0;min-height:24px;height:24px;padding:4px;font-size:10px;border-radius:3px}
+.auctionTable.compactComparison .compactPlayer input[type=number]{width:100%;height:22px;min-height:22px;margin-top:3px;text-align:left;background:#fff9e9;color:#785a20;font-weight:700}
+.auctionTable.compactComparison td.numeric{font-size:12px}
+.auctionTable.compactComparison .auctionStatus{font-size:7px;padding:6px 4px;white-space:normal}
+.auctionTable.compactComparison .auctionNameOptions{min-width:235px;font-size:12px}
+.auctionTable.compactComparison tfoot td{height:34px;font-size:10px}
+.auctionWideView .auctionWorkspace{position:fixed;inset:0;z-index:1000;max-width:none;background:#f5f1e8;padding:12px;overflow:auto}
+.auctionWideView .auctionWorkspace>.auctionTitle,.auctionWideView .auctionWorkspace>.auctionKpis,.auctionWideView .auctionWorkspace>.auctionSettingsSummary,.auctionWideView .auctionWorkspace>.auctionNotes,.auctionWideView .auctionFilters,.auctionWideView .auctionViewBar{display:none}
+.auctionWideView .auctionTableScroll{max-height:none}
+.auctionWideView .auctionTableMeta{margin:0 0 8px;padding:4px}
+.auctionWideView .auctionSaveBar{padding:10px 16px}
 .auctionTable .inlineRosterRow>td{padding:12px 18px 24px;background:#fff!important;border-bottom:3px solid #d5dce5;white-space:normal}
 .inlineRoster{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .inlinePlayer{display:grid;grid-template-columns:22px minmax(0,1fr) 76px;gap:8px;align-items:end;padding:12px;background:#f5f7fa;border:1px solid #e2e7ed;border-radius:8px;min-width:0}
