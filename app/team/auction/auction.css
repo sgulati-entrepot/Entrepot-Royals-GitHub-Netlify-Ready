@@ -19,6 +19,23 @@
 
 /* Refined royal workspace */
 .auctionWorkspace{max-width:1720px}
+.teamComparison{background:#fff;border:1px solid #dfd8c9;border-radius:14px;padding:28px;margin-top:24px;box-shadow:0 10px 30px #10203906}
+.teamComparison header{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.teamComparison h3{font:30px/1.2 Georgia,serif;margin:10px 0}
+.teamComparison header p:last-child,.comparisonNote{font:12px/1.7 Arial,sans-serif;color:#617087}
+.teamComparison header label{font:600 12px Arial,sans-serif;color:#18314e;min-width:210px}
+.teamComparison select{display:block;width:100%;padding:12px;margin-top:8px;border:1px solid #ccd5df;border-radius:6px;background:#f6f8fa;color:#18314e;font-size:14px}
+.comparisonAxis{margin:24px 115px 10px 210px;display:flex;justify-content:space-between;color:#69798b;font-size:11px;font-variant-numeric:tabular-nums}
+.comparisonBars{list-style:none;margin:0;padding:0}
+.comparisonBars li{display:grid;grid-template-columns:190px minmax(0,1fr) 95px;gap:20px;align-items:center;min-height:42px;padding:6px 0;border-top:1px solid #edf0f4}
+.comparisonName{font:600 13px/1.5 Arial,sans-serif;color:#203a55;overflow-wrap:anywhere}
+.comparisonTrack{height:22px;position:relative;background:#f1f4f8;border-radius:4px}
+.comparisonBar{display:block;position:absolute;height:100%;background:linear-gradient(90deg,#183b61,#426d97);border-radius:4px}
+.comparisonBar.negative{background:#b94747}
+.comparisonZero{position:absolute;top:-4px;bottom:-4px;border-left:1px solid #b7c3d1}
+.comparisonBars strong{text-align:right;font:700 14px Arial,sans-serif;color:#18314e;font-variant-numeric:tabular-nums}
+.comparisonUnit{font-size:10px;font-weight:400;color:#66788c}
+@media(max-width:600px){.teamComparison{padding:18px 14px}.teamComparison h3{font-size:25px}.comparisonBars li{grid-template-columns:110px minmax(0,1fr) 58px;gap:10px;min-height:48px}.comparisonName{font-size:11px}.comparisonAxis{margin-left:120px;margin-right:68px}.comparisonBars strong{font-size:12px}.comparisonUnit{display:block;font-size:9px}.comparisonTrack{height:20px}}
 .columnFilters{position:relative;z-index:10;margin:18px 0;padding:16px 20px;border:1px solid #d9dfe6;border-radius:10px;background:white}
 .columnFilterControls{display:flex;gap:16px;align-items:end;flex-wrap:wrap}
 .columnFilterControls>label{font-size:12px;font-weight:600;min-width:190px}
