@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import SiteHeader from "../components/SiteHeader";
 import PricingDashboard from "./PricingDashboard";
@@ -11,14 +11,18 @@ type AuthResponse = {
   authorized?: boolean;
   error?: string;
 };
+const AUCTION_AWAY_KEY = "royal-auction-away-until";
+const AWAY_GRACE_MS = 60_000;
 
 export default function PlayerPricingGate({ auction = false }: { auction?: boolean }) {
   const [authState, setAuthState] = useState<"checking" | "locked" | "authorized">("checking");
   const [pin, setPin] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const authorizedRef = useRef(false);
 
   useEffect(() => {
+    if (auction) return;
     let cancelled = false;
     const beginLockedVisit = async () => {
       await fetch("/api/player-pricing-auth", {
@@ -32,9 +36,10 @@ export default function PlayerPricingGate({ auction = false }: { auction?: boole
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [auction]);
 
   useEffect(() => {
+    if (auction) return;
     const lockPrivatePage = () => {
       setPin("");
       setError("");
@@ -58,7 +63,62 @@ export default function PlayerPricingGate({ auction = false }: { auction?: boole
       window.removeEventListener("blur", lockPrivatePage);
       window.removeEventListener("pagehide", lockPrivatePage);
     };
-  }, []);
+  }, [auction]);
+
+  useEffect(() => {
+    if (!auction) return;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const deadline = () => { try { return Number(sessionStorage.getItem(AUCTION_AWAY_KEY)) || 0; } catch { return 0; } };
+    const clearDeadline = () => { try { sessionStorage.removeItem(AUCTION_AWAY_KEY); } catch { /* Fail closed on a fresh visit. */ } };
+    const lock = () => {
+      clearTimeout(timer); clearDeadline(); authorizedRef.current = false;
+      setPin(""); setError(""); setAuthState("locked");
+      void fetch("/api/player-pricing-auth", { method: "DELETE", credentials: "same-origin", keepalive: true }).catch(() => undefined);
+    };
+    const leave = () => {
+      if (!authorizedRef.current) return;
+      const until = deadline() || Date.now() + AWAY_GRACE_MS;
+      try { sessionStorage.setItem(AUCTION_AWAY_KEY, String(until)); } catch { lock(); return; }
+      clearTimeout(timer);
+      timer = setTimeout(lock, Math.max(0, until - Date.now()));
+    };
+    const resume = () => {
+      if (!authorizedRef.current) return;
+      const until = deadline();
+      if (until && Date.now() >= until) { lock(); return; }
+      clearTimeout(timer); clearDeadline();
+    };
+    const visibility = () => document.visibilityState === "hidden" ? leave() : resume();
+    const beginVisit = async () => {
+      const until = deadline();
+      if (!until || Date.now() >= until) { lock(); return; }
+      try {
+        const response = await fetch("/api/player-pricing-auth", { credentials: "same-origin", cache: "no-store" });
+        const result: AuthResponse = await response.json();
+        if (cancelled) return;
+        if (!response.ok || !result.authorized || Date.now() >= until) { lock(); return; }
+        authorizedRef.current = true; setAuthState("authorized");
+        if (document.visibilityState === "hidden") leave(); else resume();
+      } catch { if (!cancelled) lock(); }
+    };
+    void beginVisit();
+    document.addEventListener("visibilitychange", visibility);
+    window.addEventListener("blur", leave);
+    window.addEventListener("pagehide", leave);
+    window.addEventListener("focus", resume);
+    window.addEventListener("pageshow", resume);
+    return () => {
+      cancelled = true;
+      // Client-side route changes do not emit pagehide; retain their deadline too.
+      leave(); clearTimeout(timer);
+      document.removeEventListener("visibilitychange", visibility);
+      window.removeEventListener("blur", leave);
+      window.removeEventListener("pagehide", leave);
+      window.removeEventListener("focus", resume);
+      window.removeEventListener("pageshow", resume);
+    };
+  }, [auction]);
 
   const unlock = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -76,6 +136,8 @@ export default function PlayerPricingGate({ auction = false }: { auction?: boole
       const result = (await response.json()) as AuthResponse;
       if (!response.ok || !result.authorized) throw new Error(result.error || "Private access is unavailable.");
       setPin("");
+      authorizedRef.current = true;
+      if (auction) { try { sessionStorage.removeItem(AUCTION_AWAY_KEY); } catch { /* No persisted grace period. */ } }
       setAuthState("authorized");
     } catch (caughtError) {
       setPin("");
@@ -86,6 +148,9 @@ export default function PlayerPricingGate({ auction = false }: { auction?: boole
   };
 
   const lockPage = async () => {
+    authorizedRef.current = false;
+    if (auction) { try { sessionStorage.removeItem(AUCTION_AWAY_KEY); } catch { /* Already locked. */ } }
+    setAuthState("locked");
     await fetch("/api/player-pricing-auth", { method: "DELETE", credentials: "same-origin" }).catch(() => undefined);
     setPin("");
     setError("");
