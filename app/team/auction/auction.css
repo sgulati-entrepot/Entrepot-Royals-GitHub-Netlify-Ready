@@ -19,6 +19,20 @@
 
 /* Refined royal workspace */
 .auctionWorkspace{max-width:1720px}
+.auctionTable.compactComparison.comfortableComparison{min-width:2470px}
+.auctionTable.compactComparison.comfortableComparison th,.auctionTable.compactComparison.comfortableComparison td{padding:12px 10px;font-size:14px;border-right:1px solid #e4e8ee}
+.auctionTable.compactComparison.comfortableComparison th:first-child{width:210px;min-width:210px;box-shadow:4px 0 10px #1020390d}
+.auctionTable.compactComparison.comfortableComparison thead th:nth-child(n+2):nth-child(-n+9){width:200px}
+.auctionTable.compactComparison.comfortableComparison thead th{height:62px}
+.auctionTable.compactComparison.comfortableComparison thead button{font-size:12px;line-height:1.5;letter-spacing:.02em}
+.auctionTable.compactComparison.comfortableComparison input,.auctionTable.compactComparison.comfortableComparison th:first-child input{font-size:14px;height:38px;min-height:38px;padding:8px;color:#123a68;background:#f1f6fd;border-radius:5px}
+.auctionTable.compactComparison.comfortableComparison .compactPlayer input[type=number]{height:34px;min-height:34px;margin-top:7px;font-size:15px;padding:7px 9px;color:#684d14;background:#fff8e7}
+.auctionTable.compactComparison.comfortableComparison input::placeholder{color:#65778f}
+.auctionTable.compactComparison.comfortableComparison td.numeric{font-size:17px}
+.auctionTable.compactComparison.comfortableComparison .auctionStatus{font-size:10px;padding:9px 7px}
+.auctionTable.compactComparison.comfortableComparison tfoot td{font-size:13px;height:48px}
+.auctionTableActions{flex-wrap:wrap;justify-content:flex-end}
+.auctionTableScroll{scrollbar-width:auto;scrollbar-color:#ad8b47 #e9e5dc}
 .auctionTable.compactComparison{min-width:1320px;table-layout:fixed}
 .auctionTable.compactComparison th,.auctionTable.compactComparison td{padding:5px 4px;font-size:11px}
 .auctionTable.compactComparison th:first-child{width:140px;min-width:140px}
