@@ -16,3 +16,65 @@
 .auctionSaveBar{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px;background:#0b2242;color:#fff}.auctionSaveBar strong{display:block;font-size:13px;color:#f0d997}.auctionSaveBar span{display:block;margin-top:7px;font-size:11px;color:#9cacc2}.auctionSaveBar>div:last-child{display:flex;gap:12px}.auctionGhost,.auctionGold{min-height:40px;padding:10px 16px;cursor:pointer;border:1px solid #b8a579;background:transparent;color:#5d481b;font:700 10px Arial,sans-serif;letter-spacing:.05em}.auctionGold{background:linear-gradient(120deg,#f1d996,#c29c45);color:#142337;border-color:#c29c45}.auctionSaveBar .auctionGhost{color:#ddcfad}.auctionPage button:disabled{opacity:.45;cursor:not-allowed}.auctionPage button:focus-visible{outline:2px solid #3884d7;outline-offset:3px}.auctionMessage{padding:14px 18px;background:#e7f1e7;font-size:13px;color:#30613d}.auctionMessage.error{background:#ffe4e4;color:#9b2929}.auctionWarnings{padding:18px;background:#fff0d6;border-left:3px solid #b9842b;margin-top:20px;font-size:12px}.auctionWarnings p{line-height:1.8;margin-bottom:0}.auctionNotes{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:38px}.auctionNotes small{font-size:9px;font-weight:800;letter-spacing:.13em;color:#987225}.auctionNotes h3{font:26px Georgia,serif;margin:15px 0}.auctionNotes p{font:13px/1.8 Arial,sans-serif;color:#687181}.auctionLoad{padding:50px;text-align:center;background:#fff;font-size:14px}
 @media(max-width:1100px){.auctionKpis{grid-template-columns:repeat(3,1fr)}.auctionHeroBadge{display:none}.auctionViewBar{align-items:stretch;flex-direction:column}.auctionViewBar>span{padding-bottom:12px}.auctionWorkspace{padding:35px 22px 60px}}
 @media(max-width:600px){.auctionHero{height:370px;padding:120px 22px 35px}.auctionHeroCopy h1{font-size:43px}.auctionKpis{grid-template-columns:repeat(2,1fr)}.auctionKpis strong{font-size:29px}.auctionWorkspace{padding:30px 14px 50px}.auctionKpis article{padding:20px 14px}.auctionTitle{align-items:start}.auctionTitle h2{font-size:29px}.auctionSettingsSummary{gap:14px}.auctionSettingsSummary button{margin-left:0}.auctionViewBar button{padding:15px 12px}.auctionTableMeta{align-items:start;flex-direction:column}.auctionSaveBar{align-items:stretch;flex-direction:column;padding:20px 15px}.auctionSaveBar>div:last-child{flex-wrap:wrap}.auctionNotes{grid-template-columns:1fr;gap:20px}.auctionTable th:first-child{min-width:145px}.auctionTable th:first-child input{width:130px}}
+
+/* Refined royal workspace */
+.auctionWorkspace{max-width:1720px}
+.auctionHeroBadge{border-radius:12px}
+.auctionKpis{gap:12px;background:none;border:0}
+.auctionKpis article{border:1px solid #e2ddd2;border-radius:12px;box-shadow:0 6px 20px #10203905;padding:24px}
+.auctionKpis strong{font-size:34px}.auctionKpis article span{line-height:1.6}
+.auctionSettingsSummary{padding:24px 2px}
+.auctionViewBar{padding:8px;background:#ebe6dc;border:1px solid #e0d9cc;border-radius:12px;margin-top:16px}
+.auctionViewBar [role=tablist]{gap:4px;flex:1}
+.auctionViewBar button{padding:16px 20px;border:0;border-radius:8px;background:transparent;display:flex;align-items:center;gap:12px}
+.auctionViewBar button small{opacity:.65;font-size:10px;font-weight:400}
+.auctionViewBar button[aria-selected=true]{background:#102944;color:#f2d99b;box-shadow:0 3px 10px #10203918}
+.auctionViewBar .auctionAutoBadge{margin:0 12px;padding:7px 12px;border-radius:20px;background:#fff;font-size:10px;color:#426149;white-space:nowrap}
+.auctionFilters{padding:22px;background:#fff;border:1px solid #e2ddd2;border-radius:12px;gap:16px;margin:24px 0}
+.auctionFilters input,.auctionFilters select{height:44px;border-radius:6px;background:#fafbfc;border-color:#d9dfe6}
+.auctionGhost,.auctionGold{border-radius:6px;min-height:44px}
+.auctionTableMeta{padding:4px 2px 8px}.auctionTableActions{display:flex;gap:24px;align-items:center}
+.auctionTableScroll{border-radius:12px 12px 0 0;border-color:#dbe1e7;box-shadow:0 12px 35px #10203908}
+.auctionTable{font-size:13px}.auctionTable.dashboard{min-width:950px}
+.auctionTable th,.auctionTable td{padding:18px 20px}
+.auctionTable thead th{height:70px;background:#102944}
+.auctionTable thead th:first-child{background:#0b213a}
+.auctionTable thead button{font-size:10px;line-height:1.6}
+.auctionTable th.numeric,.auctionTable th.numeric button{text-align:right}
+.auctionTable th.numeric button{width:100%}
+.auctionTable td.numeric{font-size:15px;letter-spacing:-.02em}
+.auctionTable tbody tr:nth-child(even) td,.auctionTable tbody tr:nth-child(even) th{background:#f8fafc}
+.auctionTable th:first-child{min-width:235px;border-right-color:#e4e8ed}
+.auctionTable th:first-child input{width:205px}
+.auctionTable input{border-radius:6px;background:#f0f5fc;border-color:#d4e0f0;min-height:42px}
+.auctionTable tbody tr:hover td,.auctionTable tbody tr:hover th{background:#f1f5fa}
+.auctionTable td[data-column=maxBid]{color:#947025;background:#faf6e9;font-size:18px;font-weight:700}
+.auctionTable .editSquadButton{display:flex;justify-content:space-between;align-items:center;width:100%;padding:10px 2px 0;background:none;border:0;color:#7f642d;font:600 11px Arial,sans-serif;cursor:pointer}
+.auctionTable .editSquadButton span{font-size:17px}
+.auctionStatus{border-radius:20px;padding:9px 12px;font-size:9px}
+.auctionTable tfoot td{padding:20px;background:#e9edf2;color:#20364f;font-size:11px}
+.auctionSaveBar{border-radius:0 0 12px 12px;padding:24px 28px;background:#102944}
+.auctionNotes{gap:24px}.auctionNotes article{border-top:1px solid #cfc2a8;padding:24px 8px}
+.playerCategoryGrid article{border-radius:12px;border-color:#e2ddd2}
+.auctionNameOptions{border-radius:8px;box-shadow:0 12px 32px #10203924}
+.royalSquadDialog{width:min(1100px,calc(100vw - 32px));max-height:90vh;max-height:90dvh;margin:auto;padding:0;border:1px solid #d9c590;border-radius:16px;background:#f6f3ec;color:#102039;box-shadow:0 24px 90px #0005;overflow:auto}
+.royalSquadDialog::backdrop{background:#061427b8;backdrop-filter:blur(5px)}
+.royalSquadDialog header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:#102944;color:#fff}
+.royalSquadDialog h2{font:32px/1.2 Georgia,serif;margin:12px 0 0}
+.royalSquadDialog .sectionLabel{font-size:10px;letter-spacing:.16em;color:#e5ca88}
+.royalSquadDialog header button{color:#f0d99f;flex-shrink:0}
+.squadBudget{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:24px 32px;background:#fff;border-bottom:1px solid #e3ded3}
+.squadBudget span{font:11px Arial,sans-serif;color:#647186}.squadBudget b{display:block;margin-top:10px;font:26px Georgia,serif;color:#102944;font-variant-numeric:tabular-nums}
+.squadHint{padding:20px 32px 0;margin:0;font:12px/1.7 Arial,sans-serif;color:#637187}
+.squadCards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:24px 32px 36px}
+.squadCards article{padding:18px;border:1px solid #e0dcd2;border-radius:10px;background:#fff;min-width:0}
+.squadSlot{display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 10px Arial,sans-serif;letter-spacing:.06em;color:#967331;margin-bottom:24px}
+.squadSlot span{font-size:9px;letter-spacing:0;color:#68778a;font-weight:400}
+.squadCards label{display:block;font:11px Arial,sans-serif;color:#56667b;margin:16px 0 8px}
+.squadCards input{width:100%;box-sizing:border-box;min-height:44px;padding:10px;border:1px solid #cedbed;border-radius:6px;background:#f0f5fc;color:#173d78;font:13px Arial,sans-serif}
+.squadCards input:focus-visible{outline:2px solid #b28b3b;outline-offset:2px}
+.squadCards input[type=number]{font-variant-numeric:tabular-nums}
+.royalSquadDialog footer{padding:20px 32px;background:#eae6db;color:#52634b;font:12px/1.6 Arial,sans-serif}
+.royalSquadDialog footer [role=alert]{color:#9b2929}
+@media(max-width:1100px){.auctionViewBar{flex-direction:row;flex-wrap:wrap;align-items:center}.auctionViewBar button{padding:14px}.auctionViewBar .auctionAutoBadge{margin:0}.squadCards{grid-template-columns:repeat(2,minmax(0,1fr))}.auctionTable th,.auctionTable td{padding:16px}}
+@media(max-width:600px){.auctionKpis{gap:8px}.auctionKpis article{padding:18px 14px}.auctionKpis strong{font-size:27px}.auctionViewBar [role=tablist]{display:grid;grid-template-columns:1fr 1fr;width:100%;flex-basis:100%}.auctionViewBar button{font-size:11px;gap:8px;padding:14px 10px}.auctionViewBar .auctionAutoBadge{margin:4px}.auctionFilters{padding:16px;gap:14px}.auctionTable th:first-child{min-width:190px}.auctionTable th:first-child input{width:160px}.auctionTableActions{gap:20px}.auctionSaveBar{padding:20px}.royalSquadDialog header{padding:22px 18px;align-items:start}.royalSquadDialog h2{font-size:24px}.royalSquadDialog header button{padding:8px;font-size:9px}.squadBudget{padding:20px 18px;gap:12px}.squadBudget b{font-size:20px}.squadBudget span{font-size:10px;line-height:1.5}.squadCards{grid-template-columns:1fr;padding:18px}.squadHint{padding:18px 18px 0}.royalSquadDialog footer{padding:20px 18px}}
