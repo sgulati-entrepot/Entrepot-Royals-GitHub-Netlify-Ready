@@ -6,6 +6,7 @@ import SiteHeader from "../../components/SiteHeader";
 import Footer from "../../components/Footer";
 import { AuctionDocument, AuctionSettings, AuctionTeam, createAuction, emptyPlayer, format, leagueMetrics, statuses, teamMetrics, validateAuction } from "../../../lib/auction";
 import "./auction.css";
+import PlayerPool from "./PlayerPool";
 
 type Snapshot = { document: AuctionDocument; version: string | null; updatedAt: string | null; error?: string };
 type Column = { key: string; label: string; numeric?: boolean };
@@ -38,7 +39,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
-  const [view, setView] = useState<"entry" | "dashboard">("entry");
+  const [view, setView] = useState<"entry" | "dashboard" | "players" | "availability">("entry");
   const [sort, setSort] = useState({ key: "name", direction: 1 });
   const [dashboardSort, setDashboardSort] = useState({ key: "left", direction: -1 });
   const [search, setSearch] = useState("");
@@ -99,7 +100,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
     if (![s.kitty, s.baseBid].every(n => Number.isFinite(n) && n > 0 && n <= 1_000_000) || !Number.isInteger(s.teamCount) || s.teamCount < 1 || s.teamCount > 64 || !Number.isInteger(s.playersPerTeam) || s.playersPerTeam < 1 || s.playersPerTeam > 32) { setError("Enter positive budgets, 1–64 teams and 1–32 players per team."); return; }
     if (doc.teams.slice(s.teamCount).some(team => team.players.some(p => p.name || p.bid !== null)) || doc.teams.some(team => team.players.slice(s.playersPerTeam).some(p => p.name || p.bid !== null))) { setError("These settings would remove player entries. Clear those entries deliberately before reducing team or player counts."); return; }
     const teams = Array.from({ length: s.teamCount }, (_, i) => ({ id: i + 1, name: doc.teams[i]?.name ?? `Team ${String(i + 1).padStart(2, "0")}`, players: Array.from({ length: s.playersPerTeam }, (_, j) => doc.teams[i]?.players[j] ?? emptyPlayer(j + 1)) }));
-    edit({ settings: { ...s }, teams }); setSettingsOpen(false);
+    edit({ ...doc, settings: { ...s }, teams }); setSettingsOpen(false);
   };
 
   const columns = useMemo<Column[]>(() => view === "entry" ? [
@@ -141,6 +142,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   };
 
   return <main className="auctionPage" id="main-content">
+    <datalist id="auction-registered-players">{doc.registry.map(p => <option key={p.name} value={p.name} />)}</datalist>
     <SiteHeader active="team" ctaHref="/team/2026" ctaLabel="Team of 2026" />
     <header className="auctionHero">
       <Image src="/pricing-hero-stadium.jpg" alt="Cricket stadium and auction desk" fill sizes="100vw" priority />
@@ -153,6 +155,9 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
       <div className="auctionSettingsSummary"><span>Team kitty <b>₹{format(doc.settings.kitty)} L</b></span><span>Base bid <b>₹{format(doc.settings.baseBid)} L</b></span><span>Total slots <b>{doc.settings.teamCount * doc.settings.playersPerTeam}</b></span><button onClick={() => { setSettingsDraft(doc.settings); setSettingsOpen(!settingsOpen); }} disabled={!saved || saving}>{settingsOpen ? "Close settings" : "Edit auction settings"}</button></div>
       {settingsOpen && <div className="auctionSettings">{([['kitty', 'Team kitty · ₹ lakh'], ['baseBid', 'Base bid · ₹ lakh'], ['playersPerTeam', 'Players per team'], ['teamCount', 'Number of teams']] as const).map(([key, label]) => <label key={key}>{label}<input type="number" min={key === "kitty" || key === "baseBid" ? 0.01 : 1} step={key === "kitty" || key === "baseBid" ? 0.01 : 1} value={settingsDraft[key]} onChange={e => setSettingsDraft({ ...settingsDraft, [key]: Number(e.target.value) })} /></label>)}<button className="auctionGold" onClick={applySettings}>Apply settings</button></div>}
       <div className="auctionViewBar"><div role="tablist" aria-label="Workbook sheets"><button role="tab" aria-selected={view === "entry"} onClick={() => { setView("entry"); setFilter({ key: "left", operator: "gte", value: "" }); }}>01 / Auction Entry</button><button role="tab" aria-selected={view === "dashboard"} onClick={() => { setView("dashboard"); setFilter({ key: "left", operator: "gte", value: "" }); }}>02 / Live Dashboard</button></div><span>{view === "entry" ? "Blue cells are editable · All bids in ₹ lakh" : "Live calculations · Click any column heading to sort"}</span></div>
+      <div className="auctionViewBar playerViewBar"><div role="tablist" aria-label="Player workbook sheets"><button role="tab" aria-selected={view === "players"} onClick={() => setView("players")}>03 / Player List</button><button role="tab" aria-selected={view === "availability"} onClick={() => setView("availability")}>04 / Player Dashboard</button></div><span>One master list · availability follows team selections</span></div>
+      {(view === "players" || view === "availability") && <PlayerPool doc={doc} dashboard={view === "availability"} disabled={!saved || saving} onChange={registry => edit({ ...doc, registry })} />}
+      {(view === "entry" || view === "dashboard") && <>
       <div className="auctionFilters"><label>Search teams or players<input type="search" value={search} onChange={e => setSearch(e.target.value)} placeholder="Find a team or player…" /></label><label>Status<select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}><option value="">All statuses</option>{statuses.map(status => <option key={status}>{status}</option>)}</select></label><label>Filter column<select value={filter.key} onChange={e => setFilter({ ...filter, key: e.target.value })}>{columns.map(c => <option key={c.key} value={c.key}>{c.label}</option>)}</select></label><label>Condition<select value={filter.operator} onChange={e => setFilter({ ...filter, operator: e.target.value })}><option value="gte">At least</option><option value="lte">At most</option><option value="eq">Equals</option><option value="contains">Contains</option></select></label><label>Filter value<input value={filter.value} onChange={e => setFilter({ ...filter, value: e.target.value })} placeholder="Any value" /></label><button className="auctionGhost" onClick={() => { setSearch(""); setStatusFilter(""); setFilter({ key: "left", operator: "gte", value: "" }); }}>Clear filters</button></div>
       <div className="auctionTableMeta"><span>{rows.length} of {doc.teams.length} teams · {view === "entry" ? "Scroll horizontally for all player slots and budgets" : "Ranked independently from Auction Entry"}</span><button onClick={exportCsv} disabled={!saved}>Export this view (CSV)</button></div>
       {loading ? <div className="auctionLoad" role="status">Loading the saved auction…</div> : !saved ? <div className="auctionLoad"><p role="alert">{error}</p><button className="auctionGold" onClick={() => void load()}>Retry loading</button></div> : <div className="auctionTableScroll" tabIndex={0} aria-label={`${view === "entry" ? "Auction entry" : "Live dashboard"} table, horizontally scrollable`}>
@@ -160,7 +165,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
         <tbody>{rows.map(team => { const m = teamMetrics(team, doc.settings); return <tr key={team.id}>{columns.map(c => {
           const value = cellValue(team, doc.settings, c.key);
           if (view === "entry" && c.key === "name") return <th scope="row" key={c.key}><input aria-label={`Team ${team.id} name`} maxLength={80} value={team.name} disabled={saving} onChange={e => editTeam(team.id, t => ({ ...t, name: e.target.value }))} /></th>;
-          if (view === "entry" && c.key.startsWith("player-")) { const [, index, field] = c.key.split("-"); const p = team.players[Number(index)]; return <td key={c.key}><input aria-label={`${team.name} ${c.label}`} type={field === "bid" ? "number" : "text"} inputMode={field === "bid" ? "decimal" : undefined} min={field === "bid" ? doc.settings.baseBid : undefined} step={field === "bid" ? "0.01" : undefined} maxLength={field === "name" ? 80 : undefined} value={value ?? ""} placeholder={field === "bid" ? "—" : "Player name"} disabled={saving} aria-invalid={field === "bid" && p.bid !== null && p.bid < doc.settings.baseBid} onChange={e => { const next = field === "bid" ? e.target.value === "" ? null : Number(e.target.value) : e.target.value; editTeam(team.id, t => ({ ...t, players: t.players.map(player => player.id === p.id ? { ...player, [field]: next } : player) })); }} /></td>; }
+          if (view === "entry" && c.key.startsWith("player-")) { const [, index, field] = c.key.split("-"); const p = team.players[Number(index)]; return <td key={c.key}><input list={field === "name" ? "auction-registered-players" : undefined} aria-label={`${team.name} ${c.label}`} type={field === "bid" ? "number" : "text"} inputMode={field === "bid" ? "decimal" : undefined} min={field === "bid" ? doc.settings.baseBid : undefined} step={field === "bid" ? "0.01" : undefined} maxLength={field === "name" ? 80 : undefined} value={value ?? ""} placeholder={field === "bid" ? "—" : "Player name"} disabled={saving} aria-invalid={field === "bid" && p.bid !== null && p.bid < doc.settings.baseBid} onChange={e => { const next = field === "bid" ? e.target.value === "" ? null : Number(e.target.value) : e.target.value; editTeam(team.id, t => ({ ...t, players: t.players.map(player => player.id === p.id ? { ...player, [field]: next } : player) })); }} /></td>; }
           if (c.key === "status") return <td key={c.key}><span className={`auctionStatus ${statusClass(m.status)}`}>{m.status}</span></td>;
           if (c.key === "used") return <td key={c.key}><div className="auctionUsage"><span style={{ width: `${Math.min(100, Math.max(0, m.used * 100))}%` }} /><b>{format(m.used * 100)}%</b></div></td>;
           if (c.key === "name") return <th scope="row" key={c.key}>{team.name || `Team ${team.id}`}</th>;
@@ -168,6 +173,7 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
         })}</tr>; })}{rows.length === 0 && <tr><td colSpan={columns.length}>No teams match these filters.</td></tr>}</tbody>
         <tfoot><tr>{columns.map((c, i) => <td key={c.key}>{i === 0 ? "LEAGUE TOTALS" : ["spent", "left", "bought", "open"].includes(c.key) ? format(totals[c.key as "spent" | "left" | "bought" | "open"]) : c.key === "status" ? `${totals.complete} / ${doc.settings.teamCount} COMPLETE` : ""}</td>)}</tr></tfoot></table>
       </div>}
+      </>}
       <div className="auctionSaveBar"><div><strong>{!saved ? "Waiting for saved auction" : dirty ? "Unsaved changes" : "All changes saved"}</strong><span>{saved?.updatedAt ? `Last saved ${new Date(saved.updatedAt).toLocaleString("en-IN")}` : "New auction · ready for your first entries"}</span></div><div><button className="auctionGhost" disabled={!saved || saving} onClick={() => { if (dirty) setConfirmReload(true); else void load(); }}>Load saved version</button><button className="auctionGold" onClick={() => void save()} disabled={!saved || saving || !dirty}>{saving ? "Saving…" : "Save all entries"}</button></div></div>
       {confirmReload && <div className="auctionMessage" role="alert"><p>Discard unsaved edits and load the latest saved auction?</p><button className="auctionGhost" disabled={saving} onClick={() => setConfirmReload(false)}>Keep editing</button> <button className="auctionGold" disabled={saving} onClick={() => { setConfirmReload(false); editVersion.current++; current.current.dirty = false; void load(); }}>Discard edits and reload</button></div>}
       {error && saved && <p className="auctionMessage error" role="alert">{error}</p>}{notice && <p className="auctionMessage" role="status">{notice}</p>}

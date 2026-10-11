@@ -14,7 +14,7 @@ export default async function handler(request: Request) {
     if (request.method === "GET") {
       const rows = await db.sql`SELECT document, version, updated_at FROM recl5_auction WHERE id = 1`;
       const row = rows[0];
-      return json({ document: row?.document ?? createAuction(), version: row ? String(row.version) : null, updatedAt: row?.updated_at ?? null });
+      return json({ document: row ? { ...row.document, registry: row.document.registry ?? [] } : createAuction(), version: row ? String(row.version) : null, updatedAt: row?.updated_at ?? null });
     }
     const body = await request.text();
     if (body.length > 500_000) return json({ error: "The auction document is too large." }, 413);

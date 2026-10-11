@@ -1,13 +1,23 @@
 export type AuctionPlayer = { id: number; name: string; bid: number | null };
 export type AuctionTeam = { id: number; name: string; players: AuctionPlayer[] };
 export type AuctionSettings = { kitty: number; baseBid: number; playersPerTeam: number; teamCount: number };
-export type AuctionDocument = { settings: AuctionSettings; teams: AuctionTeam[] };
+export const categories = ["Batsman", "Bowler", "All Rounder", "DNT", "Losers"] as const;
+export type RegisteredPlayer = { name: string; preferred: "" | "Yes" | "No"; category: string };
+export type AuctionDocument = { settings: AuctionSettings; teams: AuctionTeam[]; registry: RegisteredPlayer[] };
+export const playerKey = (name: string) => name.trim().replace(/\s+/g, " ").toLowerCase();
+export function playerAvailability(doc: AuctionDocument) {
+  return (doc.registry ?? []).map(player => {
+    const picks = doc.teams.flatMap(team => team.players.filter(p => playerKey(p.name) === playerKey(player.name)).map(() => team.name));
+    return { ...player, count: picks.length, teams: [...new Set(picks)].join(", "), status: picks.length > 1 ? "DUPLICATE" : picks.length ? "SOLD" : "AVAILABLE" };
+  });
+}
 export const statuses = ["READY", "COMPLETE", "OVER BUDGET", "BELOW BASE", "CHECK ENTRIES", "BASE SHORTFALL"] as const;
 export type AuctionStatus = typeof statuses[number];
 export const round = (value: number) => Math.round((value + Number.EPSILON) * 100) / 100;
 export const format = (value: number) => new Intl.NumberFormat("en-IN", { maximumFractionDigits: 2 }).format(value);
 export const emptyPlayer = (id: number): AuctionPlayer => ({ id, name: "", bid: null });
 export const createAuction = (): AuctionDocument => ({
+  registry: [],
   settings: { kitty: 200, baseBid: 6, playersPerTeam: 8, teamCount: 14 },
   teams: Array.from({ length: 14 }, (_, i) => ({ id: i + 1, name: `Team ${String(i + 1).padStart(2, "0")}`, players: Array.from({ length: 8 }, (_, j) => emptyPlayer(j + 1)) })),
 });
@@ -57,5 +67,14 @@ export function validateAuction(value: unknown): AuctionDocument {
     });
     return { id: team.id, name: team.name.trim(), players };
   });
-  return { settings: { kitty: settings.kitty, baseBid: settings.baseBid, teamCount: settings.teamCount, playersPerTeam: settings.playersPerTeam }, teams };
+  if (!Array.isArray(doc.registry) || doc.registry.length > 2000) throw new Error("Please reload the page to load the player list before saving.");
+  const names = new Set<string>();
+  const registry = doc.registry.map(player => {
+    if (!player || typeof player.name !== "string" || !player.name.trim() || player.name.length > 80 || !["", "Yes", "No"].includes(player.preferred) || !["", ...categories].includes(player.category)) throw new Error("Invalid registered player, preference or category.");
+    const key = playerKey(player.name);
+    if (names.has(key)) throw new Error(`Duplicate registered player: ${player.name}`);
+    names.add(key);
+    return { name: player.name.trim(), preferred: player.preferred, category: player.category };
+  });
+  return { settings: { kitty: settings.kitty, baseBid: settings.baseBid, teamCount: settings.teamCount, playersPerTeam: settings.playersPerTeam }, teams, registry };
 }
