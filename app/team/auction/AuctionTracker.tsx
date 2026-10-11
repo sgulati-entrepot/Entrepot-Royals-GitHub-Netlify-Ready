@@ -10,6 +10,8 @@ import PlayerPool from "./PlayerPool";
 import { auctionTeamNames } from "../../../lib/auction-teams";
 
 type Snapshot = { document: AuctionDocument; version: string | null; updatedAt: string | null; error?: string };
+// Keep an interrupted edit in memory while the PIN gate relocks (never localStorage).
+let pendingDraft: { document: AuctionDocument; saved: Snapshot } | null = null;
 type Column = { key: string; label: string; numeric?: boolean };
 type Filter = { key: string; operator: string; value: string };
 const metrics: Column[] = [
@@ -40,6 +42,8 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   const [saving, setSaving] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [conflict, setConflict] = useState(false);
+  const [confirmOverwrite, setConfirmOverwrite] = useState(false);
   const [view, setView] = useState<"entry" | "dashboard" | "players" | "availability">("entry");
   const [sort, setSort] = useState({ key: "name", direction: 1 });
   const [dashboardSort, setDashboardSort] = useState({ key: "left", direction: -1 });
@@ -61,8 +65,13 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
       const data: Snapshot = await response.json();
       if (!response.ok) throw new Error(data.error || "Could not load the auction.");
       if (editVersion.current !== revision || (quiet && (current.current.dirty || current.current.saving))) return;
+      if (!quiet && pendingDraft) {
+        setDoc(pendingDraft.document); setSaved(pendingDraft.saved); setSettingsDraft(pendingDraft.document.settings);
+        if (pendingDraft.saved.version !== data.version) { setConflict(true); setError("Another session saved changes. Choose whether to load them or overwrite with your edits."); }
+        return;
+      }
       setDoc(data.document); setSaved(data); setSettingsDraft(data.document.settings);
-      setError("");
+      setError(""); setConflict(false);
       if (!quiet) setNotice("Saved auction loaded.");
     } catch (caught) { setError(caught instanceof Error ? caught.message : "Could not load the auction."); }
     finally { setLoading(false); }
@@ -79,21 +88,37 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
     return () => window.removeEventListener("beforeunload", warn);
   }, [dirty]);
 
-  const edit = (next: AuctionDocument) => { editVersion.current++; current.current.dirty = true; setDoc(next); setNotice(""); setError(""); };
+  const edit = (next: AuctionDocument) => { editVersion.current++; current.current.dirty = true; if (saved) pendingDraft = { document: next, saved }; setDoc(next); setNotice(""); setError(""); };
   const editTeam = (id: number, update: (team: AuctionTeam) => AuctionTeam) => edit({ ...doc, teams: doc.teams.map(team => team.id === id ? update(team) : team) });
-  const save = async () => {
-    if (!saved || saving) return;
+  const save = useCallback(async (overwrite = false) => {
+    if (!saved || current.current.saving) return;
+    const revision = editVersion.current;
     let document;
     try { document = validateAuction(doc); } catch (caught) { setError(caught instanceof Error ? caught.message : "Check the entries."); return; }
     setSaving(true); current.current.saving = true; setError(""); setNotice("");
     try {
-      const response = await fetch("/api/auction", { method: "PUT", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ document, version: saved.version }) });
+      let version = saved.version;
+      if (overwrite) {
+        const latest = await fetch("/api/auction", { cache: "no-store", credentials: "same-origin" });
+        const snapshot: Snapshot = await latest.json();
+        if (!latest.ok) throw new Error(snapshot.error || "Could not check the latest saved version.");
+        version = snapshot.version;
+      }
+      const response = await fetch("/api/auction", { method: "PUT", credentials: "same-origin", headers: { "content-type": "application/json" }, body: JSON.stringify({ document, version }) });
       const data: Snapshot = await response.json();
+      if (response.status === 409) setConflict(true);
       if (!response.ok) throw new Error(data.error || "Save failed. Please retry.");
-      setDoc(data.document); setSaved(data); setNotice("All auction entries saved.");
+      if (editVersion.current === revision) { setDoc(data.document); pendingDraft = null; }
+      else if (pendingDraft) pendingDraft.saved = data;
+      setSaved(data); setConflict(false); setNotice("All changes saved automatically.");
     } catch (caught) { setError(caught instanceof Error ? caught.message : "Save failed. Please retry."); }
     finally { setSaving(false); current.current.saving = false; }
-  };
+  }, [doc, saved]);
+  useEffect(() => {
+    if (!dirty || saving || error || conflict) return;
+    const timer = window.setTimeout(() => { void save(); }, 700);
+    return () => window.clearTimeout(timer);
+  }, [dirty, saving, error, conflict, save]);
 
   const applySettings = () => {
     if (saving) return;
@@ -175,11 +200,12 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
         <tfoot><tr>{columns.map((c, i) => <td key={c.key}>{i === 0 ? "LEAGUE TOTALS" : ["spent", "left", "bought", "open"].includes(c.key) ? format(totals[c.key as "spent" | "left" | "bought" | "open"]) : c.key === "status" ? `${totals.complete} / ${doc.settings.teamCount} COMPLETE` : ""}</td>)}</tr></tfoot></table>
       </div>}
       </>}
-      <div className="auctionSaveBar"><div><strong>{!saved ? "Waiting for saved auction" : dirty ? "Unsaved changes" : "All changes saved"}</strong><span>{saved?.updatedAt ? `Last saved ${new Date(saved.updatedAt).toLocaleString("en-IN")}` : "New auction · ready for your first entries"}</span></div><div><button className="auctionGhost" disabled={!saved || saving} onClick={() => { if (dirty) setConfirmReload(true); else void load(); }}>Load saved version</button><button className="auctionGold" onClick={() => void save()} disabled={!saved || saving || !dirty}>{saving ? "Saving…" : "Save all entries"}</button></div></div>
-      {confirmReload && <div className="auctionMessage" role="alert"><p>Discard unsaved edits and load the latest saved auction?</p><button className="auctionGhost" disabled={saving} onClick={() => setConfirmReload(false)}>Keep editing</button> <button className="auctionGold" disabled={saving} onClick={() => { setConfirmReload(false); editVersion.current++; current.current.dirty = false; void load(); }}>Discard edits and reload</button></div>}
+<div className="auctionSaveBar"><div><strong>{!saved ? "Waiting for saved auction" : saving ? "Saving automatically…" : dirty ? "Changes waiting to save" : "All changes saved"}</strong><span>{saved?.updatedAt ? `Last saved ${new Date(saved.updatedAt).toLocaleString("en-IN")}` : "New auction · ready for your first entries"}</span></div><div><button className="auctionGhost" disabled={!saved || saving} onClick={() => { if (dirty) setConfirmReload(true); else void load(); }}>Load saved version</button><button className="auctionGold" onClick={() => void save()} disabled={!saved || saving || !dirty || conflict}>{saving ? "Saving…" : "Save now"}</button></div></div>
+      {confirmReload && <div className="auctionMessage" role="alert"><p>Discard unsaved edits and load the latest saved auction?</p><button className="auctionGhost" disabled={saving} onClick={() => setConfirmReload(false)}>Keep editing</button> <button className="auctionGold" disabled={saving} onClick={() => { setConfirmReload(false); pendingDraft = null; setConflict(false); setError(""); editVersion.current++; current.current.dirty = false; void load(); }}>Discard edits and reload</button></div>}
       {error && saved && <p className="auctionMessage error" role="alert">{error}</p>}{notice && <p className="auctionMessage" role="status">{notice}</p>}
+      {conflict && <div className="auctionMessage error"><p>Another session changed the auction. Loading the saved version discards your edits. Overwriting replaces the entire saved auction with your current entries.</p>{confirmOverwrite ? <><button className="auctionGold" disabled={saving} onClick={() => { setConfirmOverwrite(false); void save(true); }}>Confirm overwrite saved auction</button> <button className="auctionGhost" onClick={() => setConfirmOverwrite(false)}>Cancel overwrite</button></> : <button className="auctionGold" disabled={saving} onClick={() => setConfirmOverwrite(true)}>Overwrite with my entries</button>}</div>}
       {alerts.length > 0 && <div className="auctionWarnings" role="status"><strong>{alerts.length} team{alerts.length === 1 ? "" : "s"} need attention</strong><p>{alerts.map(t => `${t.name || `Team ${t.id}`}: ${teamMetrics(t, doc.settings).status}`).join(" · ")}</p></div>}
-      <div className="auctionNotes"><article><small>BIDDING RULE</small><h3>Reserve the rest of your squad.</h3><p>Maximum next bid = budget left − (open slots − 1) × ₹{format(doc.settings.baseBid)} lakh. A new team can bid up to ₹{format(Math.max(0, doc.settings.kitty - (doc.settings.playersPerTeam - 1) * doc.settings.baseBid))} lakh.</p></article><article><small>ENTRY & SAVE GUIDE</small><p>Enter names and winning bids in the blue cells. For ₹35.5 lakh, enter 35.5. Blank bids mean an unfilled slot. Save before leaving or switching tabs—the page locks when you leave. Saved changes from other sessions appear every 15 seconds while you have no unsaved edits.</p><p>Red: over budget, below base or insufficient kitty. Amber: a player name and bid do not match. Blue: complete roster. League totals always include every team, even when filters are active.</p></article></div>
+      <div className="auctionNotes"><article><small>BIDDING RULE</small><h3>Reserve the rest of your squad.</h3><p>Maximum next bid = budget left − (open slots − 1) × ₹{format(doc.settings.baseBid)} lakh. A new team can bid up to ₹{format(Math.max(0, doc.settings.kitty - (doc.settings.playersPerTeam - 1) * doc.settings.baseBid))} lakh.</p></article><article><small>ENTRY & SAVE GUIDE</small><p>Enter names and winning bids in the blue cells. For ₹35.5 lakh, enter 35.5. Blank bids mean an unfilled slot. Edits save automatically after a brief pause. Wait for “All changes saved” before leaving or switching tabs—the page locks when you leave. Saved changes from other sessions appear every 15 seconds while you have no unsaved edits.</p><p>Red: over budget, below base or insufficient kitty. Amber: a player name and bid do not match. Blue: complete roster. League totals always include every team, even when filters are active.</p></article></div>
     </section><Footer />
   </main>;
 }
