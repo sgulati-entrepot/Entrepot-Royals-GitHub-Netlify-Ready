@@ -8,6 +8,7 @@ import { AuctionDocument, AuctionSettings, AuctionTeam, createAuction, emptyPlay
 import "./auction.css";
 import PlayerPool from "./PlayerPool";
 import { auctionTeamNames } from "../../../lib/auction-teams";
+import NameDropdown from "./NameDropdown";
 
 type Snapshot = { document: AuctionDocument; version: string | null; updatedAt: string | null; error?: string };
 // Keep an interrupted edit in memory while the PIN gate relocks (never localStorage).
@@ -168,7 +169,6 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
   };
 
   return <main className="auctionPage" id="main-content">
-    <datalist id="auction-registered-players">{doc.registry.map(p => <option key={p.name} value={p.name} />)}</datalist>
     <SiteHeader active="team" ctaHref="/team/2026" ctaLabel="Team of 2026" />
     <header className="auctionHero">
       <Image src="/pricing-hero-stadium.jpg" alt="Cricket stadium and auction desk" fill sizes="100vw" priority />
@@ -190,8 +190,8 @@ export default function AuctionTracker({ onLock }: { onLock: () => void }) {
         <table className={view === "entry" ? "auctionTable entry" : "auctionTable dashboard"}><thead><tr>{columns.map(c => <th key={c.key} scope="col" aria-sort={activeSort.key === c.key ? activeSort.direction === 1 ? "ascending" : "descending" : "none"}><button onClick={() => { const next = { key: c.key, direction: activeSort.key === c.key ? activeSort.direction * -1 : c.numeric ? -1 : 1 }; if (view === "entry") setSort(next); else setDashboardSort(next); }}>{c.label}<span aria-hidden="true">{activeSort.key === c.key ? activeSort.direction === 1 ? " ↑" : " ↓" : " ↕"}</span></button></th>)}</tr></thead>
         <tbody>{rows.map(team => { const m = teamMetrics(team, doc.settings); return <tr key={team.id}>{columns.map(c => {
           const value = cellValue(team, doc.settings, c.key);
-          if (view === "entry" && c.key === "name") return <th scope="row" key={c.key}><select className="auctionTeamSelect" aria-label={`Team ${team.id} name`} value={team.name} disabled={saving} onChange={e => editTeam(team.id, t => ({ ...t, name: e.target.value }))}>{!auctionTeamNames.includes(team.name) && <option value={team.name}>{team.name || "Select team"}</option>}{auctionTeamNames.map(name => <option key={name} value={name}>{name}</option>)}</select></th>;
-          if (view === "entry" && c.key.startsWith("player-")) { const [, index, field] = c.key.split("-"); const p = team.players[Number(index)]; return <td key={c.key}><input list={field === "name" ? "auction-registered-players" : undefined} aria-label={`${team.name} ${c.label}`} type={field === "bid" ? "number" : "text"} inputMode={field === "bid" ? "decimal" : undefined} min={field === "bid" ? doc.settings.baseBid : undefined} step={field === "bid" ? "0.01" : undefined} maxLength={field === "name" ? 80 : undefined} value={value ?? ""} placeholder={field === "bid" ? "—" : "Player name"} disabled={saving} aria-invalid={field === "bid" && p.bid !== null && p.bid < doc.settings.baseBid} onChange={e => { const next = field === "bid" ? e.target.value === "" ? null : Number(e.target.value) : e.target.value; editTeam(team.id, t => ({ ...t, players: t.players.map(player => player.id === p.id ? { ...player, [field]: next } : player) })); }} /></td>; }
+          if (view === "entry" && c.key === "name") return <th scope="row" key={c.key}><NameDropdown label={`Team ${team.id} name`} value={team.name} options={auctionTeamNames} disabled={saving} onChange={name => editTeam(team.id, t => ({ ...t, name }))} /></th>;
+if (view === "entry" && c.key.startsWith("player-")) { const [, index, field] = c.key.split("-"); const p = team.players[Number(index)]; if (field === "name") return <td key={c.key}><NameDropdown label={`${team.name} ${c.label}`} value={p.name} options={doc.registry.map(player => player.name)} disabled={saving} onChange={name => editTeam(team.id, t => ({ ...t, players: t.players.map(player => player.id === p.id ? { ...player, name } : player) }))} /></td>; return <td key={c.key}><input aria-label={`${team.name} ${c.label}`} type={field === "bid" ? "number" : "text"} inputMode={field === "bid" ? "decimal" : undefined} min={field === "bid" ? doc.settings.baseBid : undefined} step={field === "bid" ? "0.01" : undefined} maxLength={field === "name" ? 80 : undefined} value={value ?? ""} placeholder={field === "bid" ? "—" : "Player name"} disabled={saving} aria-invalid={field === "bid" && p.bid !== null && p.bid < doc.settings.baseBid} onChange={e => { const next = field === "bid" ? e.target.value === "" ? null : Number(e.target.value) : e.target.value; editTeam(team.id, t => ({ ...t, players: t.players.map(player => player.id === p.id ? { ...player, [field]: next } : player) })); }} /></td>; }
           if (c.key === "status") return <td key={c.key}><span className={`auctionStatus ${statusClass(m.status)}`}>{m.status}</span></td>;
           if (c.key === "used") return <td key={c.key}><div className="auctionUsage"><span style={{ width: `${Math.min(100, Math.max(0, m.used * 100))}%` }} /><b>{format(m.used * 100)}%</b></div></td>;
           if (c.key === "name") return <th scope="row" key={c.key}>{team.name || `Team ${team.id}`}</th>;
