@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description:
     "The official home of Entrepot Royals — built on belief, united by purpose and ready for the next chapter in RECL.",
   icons: {
-    icon: "/entrepot-royals-favicon.png",
-    shortcut: "/entrepot-royals-favicon.png",
+    icon: "/.netlify/images?url=%2Fentrepot-royals-favicon.png&w=32&fm=png",
+    shortcut: "/.netlify/images?url=%2Fentrepot-royals-favicon.png&w=32&fm=png",
   },
 };
 

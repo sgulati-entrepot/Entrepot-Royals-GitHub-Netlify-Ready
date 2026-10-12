@@ -324,8 +324,7 @@ footer { background:#00040c; }
   padding:150px 6.5vw 105px;
   background:
     linear-gradient(90deg,rgba(1,6,17,.96) 0%,rgba(2,12,30,.86) 46%,rgba(2,12,30,.42) 100%),
-    linear-gradient(180deg,rgba(1,6,17,.05) 52%,rgba(1,6,17,.82) 100%),
-    url('/home-hero-stadium-elegant.jpg') center/cover no-repeat;
+    linear-gradient(180deg,rgba(1,6,17,.05) 52%,rgba(1,6,17,.82) 100%);
 }
 .hero::before { width:640px; height:640px; right:-210px; top:120px; border-color:rgba(245,223,154,.15); }
 .hero::after { content:"ENTREPOT ROYALS · RECL"; right:-145px; bottom:305px; }
